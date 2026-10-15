@@ -1,0 +1,49 @@
+<Scheme LastUpgradeVersion="2700" version="1.3">
+  <BuildAction parallelizeBuildables="YES" buildImplicitDependencies="YES">
+    <PreActions>
+      <ExecutionAction ActionType="Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+        <ActionContent title="Prepare private local connection token" scriptText="python3 &quot;${SRCROOT}/Scripts/prepare-local-token.py&quot;&#10;">
+          <EnvironmentBuildable>
+            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="B857E870B0D950E97092515E" BuildableName="Lunelio.app" BlueprintName="Lunelio" ReferencedContainer="container:Lunelio.xcodeproj" />
+          </EnvironmentBuildable>
+        </ActionContent>
+      </ExecutionAction>
+    </PreActions>
+    <PostActions>
+      <ExecutionAction ActionType="Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+        <ActionContent title="Register signed development app" scriptText="&quot;${SRCROOT}/Scripts/register-development-build.sh&quot;&#10;">
+          <EnvironmentBuildable>
+            <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="B857E870B0D950E97092515E" BuildableName="Lunelio.app" BlueprintName="Lunelio" ReferencedContainer="container:Lunelio.xcodeproj" />
+          </EnvironmentBuildable>
+        </ActionContent>
+      </ExecutionAction>
+    </PostActions>
+    <BuildActionEntries>
+      <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
+        <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="B857E870B0D950E97092515E" BuildableName="Lunelio.app" BlueprintName="Lunelio" ReferencedContainer="container:Lunelio.xcodeproj" />
+      </BuildActionEntry>
+      <BuildActionEntry buildForTesting="YES" buildForRunning="NO" buildForProfiling="NO" buildForArchiving="NO" buildForAnalyzing="YES">
+        <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="2F28FAE94F7678B3679872C7" BuildableName="LunelioTests.xctest" BlueprintName="LunelioTests" ReferencedContainer="container:Lunelio.xcodeproj" />
+      </BuildActionEntry>
+    </BuildActionEntries>
+  </BuildAction>
+  <TestAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.IDEFoundation.Launcher.LLDB" shouldUseLaunchSchemeArgsEnv="YES">
+    <Testables>
+      <TestableReference skipped="NO">
+        <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="2F28FAE94F7678B3679872C7" BuildableName="LunelioTests.xctest" BlueprintName="LunelioTests" ReferencedContainer="container:Lunelio.xcodeproj" />
+      </TestableReference>
+    </Testables>
+  </TestAction>
+  <LaunchAction buildConfiguration="Debug" selectedDebuggerIdentifier="Xcode.DebuggerFoundation.Debugger.LLDB" selectedLauncherIdentifier="Xcode.IDEFoundation.Launcher.LLDB" launchStyle="0" useCustomWorkingDirectory="NO" ignoresPersistentStateOnLaunch="NO" debugDocumentVersioning="YES" allowLocationSimulation="YES">
+    <BuildableProductRunnable runnableDebuggingMode="0">
+      <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="B857E870B0D950E97092515E" BuildableName="Lunelio.app" BlueprintName="Lunelio" ReferencedContainer="container:Lunelio.xcodeproj" />
+    </BuildableProductRunnable>
+  </LaunchAction>
+  <ProfileAction buildConfiguration="Release" shouldUseLaunchSchemeArgsEnv="YES" savedToolIdentifier="" useCustomWorkingDirectory="NO" debugDocumentVersioning="YES">
+    <BuildableProductRunnable runnableDebuggingMode="0">
+      <BuildableReference BuildableIdentifier="primary" BlueprintIdentifier="B857E870B0D950E97092515E" BuildableName="Lunelio.app" BlueprintName="Lunelio" ReferencedContainer="container:Lunelio.xcodeproj" />
+    </BuildableProductRunnable>
+  </ProfileAction>
+  <AnalyzeAction buildConfiguration="Debug" />
+  <ArchiveAction buildConfiguration="Release" revealArchiveInOrganizer="YES" />
+</Scheme>

@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Lunelio Connector",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "description": "Connect Spotify playing in Chrome to the Lunelio Mac widget.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8Gr5oZs1qbGlO5QAjU71EyIFu3qgNoAOkSkE0IJePEfqdQDHx8UfwyCHff8iD2H3lyDl0vY2sXX0B0aQrKfCrdfEEFiIXXiEfEeOpFplQKeyYMsyeJxF/Vt3ibphYT6oWNJzCGpJk7hV9I4jI3HP4QEfhrBEp3GX+WfLXCnmF/RVv5ic1M1AhTJqyibwLE+BbGOhrDZx+y6u4fKTrAbU4ifANkA2mvLGb4dmAc0xg+FCt65AlT7aTm5QQQhiQJLRS1+j3ATojRmET+NFS4ZBWOReNKJY0k3gR33m+1/g7EzllSZU1vtDWeYMBpMhBqs7Byf8OnxbzdrcF7xRXZ2gWQIDAQAB",
+  "permissions": [
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "https://open.spotify.com/*"
+  ],
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://open.spotify.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Lunelio settings",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    },
+    "default_popup": "popup.html"
+  }
+}

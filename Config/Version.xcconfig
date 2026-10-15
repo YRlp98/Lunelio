@@ -1,0 +1,4 @@
+// Shared by all native targets and the generated Chrome manifest.
+MARKETING_VERSION = 0.0.3
+CURRENT_PROJECT_VERSION = 26
+LUNELIO_DISPLAY_VERSION = 0.0.3-beta

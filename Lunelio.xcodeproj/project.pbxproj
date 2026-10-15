@@ -1,0 +1,1387 @@
+// !$*UTF8*$!
+{
+	"classes" = {
+	};
+	"objectVersion" = "56";
+	"archiveVersion" = "1";
+	"objects" = {
+		"AA29C1F0BAF664EEBF46DF90" = {
+			"isa" = "PBXFileReference";
+			"path" = "Docs/Images";
+			"name" = "Screenshots";
+			"lastKnownFileType" = "folder";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"59D149CFC94AB2F37E6290EF" = {
+			"isa" = "PBXFileReference";
+			"path" = "Docs/Installing Lunelio.md";
+			"name" = "Installing Lunelio.md";
+			"lastKnownFileType" = "net.daringfireball.markdown";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"7F2ECB68F1AF9CF16154030B" = {
+			"isa" = "PBXFileReference";
+			"path" = "Tests/BuildScripts/test_package_release.py";
+			"name" = "test_package_release.py";
+			"lastKnownFileType" = "text.script.python";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"01902318EE09285E30261797" = {
+			"isa" = "PBXFileReference";
+			"path" = "package.command";
+			"name" = "package.command";
+			"lastKnownFileType" = "text.script.sh";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"4E9C90413E1FD964AEE1B7CC" = {
+			"isa" = "PBXFileReference";
+			"path" = "Scripts/package-release.py";
+			"name" = "package-release.py";
+			"lastKnownFileType" = "text.script.python";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"26B7BCC8942C9CA5DE842287" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CA8C6CD8B02FEA8DE8D57663";
+		};
+		"365E266B5998C1CFB536BB76" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "3DA2C8FF4BD2DD8AF9F968D9";
+		};
+		"1B0AAE8FC13C03CEC0309D9D" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "3DA2C8FF4BD2DD8AF9F968D9";
+		};
+		"3DA2C8FF4BD2DD8AF9F968D9" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/App/PlayerModel.swift";
+			"name" = "PlayerModel.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"44483D47881D6B2CAD2531DB" = {
+			"isa" = "PBXFileReference";
+			"path" = "Tests/LunelioTests/SpotifyDesktopTests.swift";
+			"name" = "SpotifyDesktopTests.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"2403E0090C007A44C9331617" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "44483D47881D6B2CAD2531DB";
+		};
+		"2FFC888D4AF38A31C4FC2F93" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "9EF5C8DDB53F3E5E1E058EB5";
+		};
+		"7223472A6D763D7597F9D162" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "9EF5C8DDB53F3E5E1E058EB5";
+		};
+		"9EF5C8DDB53F3E5E1E058EB5" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/App/PlaybackSource.swift";
+			"name" = "PlaybackSource.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"CAD626570D6EF55DD8CC25CD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "223565B5AC8A4B960818A784";
+		};
+		"310F18BD1C2201DC500ABABA" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "223565B5AC8A4B960818A784";
+		};
+		"223565B5AC8A4B960818A784" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/App/SpotifyDesktop.swift";
+			"name" = "SpotifyDesktop.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"84BBAC37BE387BB883EA01D5" = {
+			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Release";
+			"buildConfigurations" = (
+				"A9497CE23FDDC0787512981E",
+				"A9DD297AC466B8C891118663",
+			);
+		};
+		"49890BE777B686F6FB809B2B" = {
+			"path" = "Sources/Shared/PlaybackIntent.swift";
+			"isa" = "PBXFileReference";
+			"name" = "PlaybackIntent.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"59AAF3E1D9E014C08411952C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DB451F7C7C6D993C3E95A016";
+		};
+		"4242D0D062D5D7C8145C5537" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E0E27618A2D2A8FEBDD49F35";
+		};
+		"753FF4423EA99986CA019020" = {
+			"path" = "BrowserExtension/icons/icon48.png";
+			"isa" = "PBXFileReference";
+			"name" = "icon48.png";
+			"lastKnownFileType" = "image.png";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"AA57B07521E5257EA2F297C4" = {
+			"buildActionMask" = "2147483647";
+			"dstSubfolderSpec" = "13";
+			"isa" = "PBXCopyFilesBuildPhase";
+			"runOnlyForDeploymentPostprocessing" = "0";
+			"dstPath" = "";
+			"name" = "Embed Widget Extension";
+			"files" = (
+				"19584F9AEEAC24FC4A2A9ECF",
+			);
+		};
+		"A9497CE23FDDC0787512981E" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG $(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"68B33664AF995AEBF6BF3543" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"00C45FD35CB0F9C5F764F070" = {
+			"isa" = "PBXGroup";
+			"name" = "Products";
+			"children" = (
+				"F9CDCD16DBDDA0F9FD9EC38F",
+				"1BD1A2F8424FB5E7A03B8297",
+				"602E88C3E958B19F15B7B818",
+				"44F7D1F6A3DDAC9085BD2A43",
+			);
+			"sourceTree" = "<group>";
+		};
+		"6753EAA22E1DA11DB59DF0A5" = {
+			"path" = "Sources/App/BridgeServer.swift";
+			"isa" = "PBXFileReference";
+			"name" = "BridgeServer.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"D48B653E84B20D746B43A581" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"F8B136C2FFBC6429D3F7E7FF" = {
+			"path" = "Config/App-Info.plist";
+			"isa" = "PBXFileReference";
+			"name" = "App-Info.plist";
+			"lastKnownFileType" = "text.plist.xml";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"35F54E9E93AA4972AE4E9FCE" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "2F99FBF150572144C1D424B7";
+		};
+		"1C512A53A11000B9ACE9B332" = {
+			"path" = "Resources/MenuBarIcon.png";
+			"isa" = "PBXFileReference";
+			"name" = "MenuBarIcon.png";
+			"lastKnownFileType" = "image.png";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"D183ADE5215FECFCC1A50ADC" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited)";
+			};
+			"name" = "Release";
+		};
+		"A64E97F5D7DFA373DF18116D" = {
+			"isa" = "PBXGroup";
+			"name" = "NativeHost";
+			"children" = (
+				"D995C0480D74F7E15EFA0634",
+			);
+			"sourceTree" = "<group>";
+		};
+		"D995C0480D74F7E15EFA0634" = {
+			"path" = "Sources/NativeHost/NativeHost.swift";
+			"isa" = "PBXFileReference";
+			"name" = "NativeHost.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"FFB6E326B8109145B6E222DE" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B8A870DA94BDEA4A68C6B33F";
+		};
+		"52EF79F58739615F746EABAC" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F360AC260A2DB32EAFCDB36E";
+		};
+		"766C6B6F5F5419287FCC34ED" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CA8C6CD8B02FEA8DE8D57663";
+		};
+		"AEB616C7E077313FE591F2DC" = {
+			"path" = "Tests/LunelioTests/BrowserPlaybackTests.swift";
+			"isa" = "PBXFileReference";
+			"name" = "BrowserPlaybackTests.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"9477500E2AEC9666F916A035" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"remoteGlobalIDString" = "C9167A22A6D40907202AE081";
+			"remoteInfo" = "PrepareResources";
+			"proxyType" = "1";
+		};
+		"9F22D0AA9EB08989B324064B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "2B24E5DF819E24531C697495";
+		};
+		"808ED12139EB4E68089C572E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F360AC260A2DB32EAFCDB36E";
+		};
+		"6BE950D25A79D785300A51B0" = {
+			"path" = "BrowserExtension/worker.js";
+			"isa" = "PBXFileReference";
+			"name" = "worker.js";
+			"lastKnownFileType" = "sourcecode.javascript";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"E0E27618A2D2A8FEBDD49F35" = {
+			"path" = "Resources/Assets.xcassets";
+			"isa" = "PBXFileReference";
+			"name" = "Assets.xcassets";
+			"lastKnownFileType" = "folder.assetcatalog";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"041DDB58E014BC1D873A1B7E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "628F709C380D84BD5390913A";
+		};
+		"1C48CE29E4E135EE62951B22" = {
+			"isa" = "PBXGroup";
+			"name" = "App";
+			"children" = (
+				"3DA2C8FF4BD2DD8AF9F968D9",
+				"9EF5C8DDB53F3E5E1E058EB5",
+				"223565B5AC8A4B960818A784",
+				"2F99FBF150572144C1D424B7",
+				"6753EAA22E1DA11DB59DF0A5",
+				"CA8C6CD8B02FEA8DE8D57663",
+				"F6E7A625BDCA9C05984BCBD0",
+			);
+			"sourceTree" = "<group>";
+		};
+		"A567B9B95955482AE5E89B7E" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"LD_RUNPATH_SEARCH_PATHS" = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG $(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
+				"SKIP_INSTALL" = "YES";
+				"PRODUCT_MODULE_NAME" = "SpotifyMiniWidget";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
+				"PRODUCT_NAME" = "SpotifyMiniWidget";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "LunelioIcon";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini.widget";
+			};
+			"name" = "Debug";
+		};
+		"156052F04525D0F710673CF0" = {
+			"isa" = "PBXGroup";
+			"name" = "Tests";
+			"children" = (
+				"7F2ECB68F1AF9CF16154030B",
+				"44483D47881D6B2CAD2531DB",
+				"D226C23BC0F1BDF931EF1C2C",
+				"AEB616C7E077313FE591F2DC",
+				"D3E6E81A3FFA05B43FD40DC6",
+				"8A1CC9620D38664B7659342E",
+			);
+			"sourceTree" = "<group>";
+		};
+		"9BC31372340E0BDFD9B7CA7C" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG $(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"PRODUCT_MODULE_NAME" = "SpotifyMiniBridge";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SKIP_INSTALL" = "YES";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini.bridge";
+				"ENABLE_TESTABILITY" = "YES";
+				"PRODUCT_NAME" = "SpotifyMiniBridge";
+			};
+			"name" = "Debug";
+		};
+		"F8520349AD08FA9A2DCE3181" = {
+			"path" = "Config/Version.xcconfig";
+			"isa" = "PBXFileReference";
+			"name" = "Version.xcconfig";
+			"lastKnownFileType" = "text.xcconfig";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"2B1A47903122B3078EBB0B0B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D226C23BC0F1BDF931EF1C2C";
+		};
+		"1BD1A2F8424FB5E7A03B8297" = {
+			"path" = "SpotifyMiniWidget.appex";
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.app-extension";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"7FD01B10DF6BCFBA0BF2B2BA" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"B7857D5CBD0684E22140306A",
+				"50691A310B2215490A8FB848",
+				"CDD640657B18B0025DC5D801",
+				"FFB6E326B8109145B6E222DE",
+				"63AB461C37BCE1F485FFE914",
+				"6471195385C07E7FB30EC302",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"2C277EED17662010128DA21F" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"1B0AAE8FC13C03CEC0309D9D",
+				"7223472A6D763D7597F9D162",
+				"310F18BD1C2201DC500ABABA",
+				"35F54E9E93AA4972AE4E9FCE",
+				"B3CE8C6D49E1667D18EA6618",
+				"766C6B6F5F5419287FCC34ED",
+				"694BDA1141170A976B42FE2B",
+				"9F22D0AA9EB08989B324064B",
+				"45FD7A750BD8CAC0E62B317D",
+				"633A5D756662D3E2958D90CE",
+				"35BC64DD73D5A9E454684AC6",
+				"3B3C68D3F32942981D89CE86",
+				"808ED12139EB4E68089C572E",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"694BDA1141170A976B42FE2B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F6E7A625BDCA9C05984BCBD0";
+		};
+		"DF891E785808226D241F246E" = {
+			"isa" = "PBXGroup";
+			"sourceTree" = "<group>";
+			"children" = (
+				"A9012353AFD6A66EB75D4BE2",
+				"156052F04525D0F710673CF0",
+				"A024F06580C79B7582C3806A",
+				"C23108729D1809B8323E9806",
+				"53C1EFFF7D8BAECD3FD3901F",
+				"B023CA8F0F68491740229B47",
+				"86E76DCFD8B38CD6265704AD",
+				"3A585FA15D66223CDC83266F",
+				"00C45FD35CB0F9C5F764F070",
+			);
+		};
+		"14B18E9CC7F75FE3864746DA" = {
+			"path" = "Design/Branding";
+			"isa" = "PBXFileReference";
+			"name" = "Branding";
+			"lastKnownFileType" = "folder";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"19A9076371E86FCCE163292A" = {
+			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Release";
+			"buildConfigurations" = (
+				"F4C311282BA0736FA9A46243",
+				"D183ADE5215FECFCC1A50ADC",
+			);
+		};
+		"4E4CFABABA74E0E0FA7D7C71" = {
+			"path" = "Docs/Release Guide.md";
+			"isa" = "PBXFileReference";
+			"name" = "Release Guide.md";
+			"lastKnownFileType" = "net.daringfireball.markdown";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"369CB9AEEF10065E0C6F673A" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"PRODUCT_MODULE_NAME" = "LunelioTests";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"SKIP_INSTALL" = "YES";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.LunelioTests";
+				"PRODUCT_NAME" = "LunelioTests";
+			};
+			"name" = "Release";
+		};
+		"8FE2AA60C1A3129E599E3B20" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "92E59706452E4F3A4922375A";
+			"targetProxy" = "024A2D483E40A69114F9B737";
+		};
+		"12CDEFCB867756A224AD6792" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"remoteGlobalIDString" = "CB26E6A1B03D43B728FF378B";
+			"remoteInfo" = "LunelioWidget";
+			"proxyType" = "1";
+		};
+		"F371C043E744A58531A0CC9D" = {
+			"path" = "Sources/Widget/Widget.swift";
+			"isa" = "PBXFileReference";
+			"name" = "Widget.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"162319CC4D27E90869EAAF1C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "49890BE777B686F6FB809B2B";
+		};
+		"646A36D3D0F68D9DF6EBCBEB" = {
+			"path" = "Config/Widget-Info.plist";
+			"isa" = "PBXFileReference";
+			"name" = "Widget-Info.plist";
+			"lastKnownFileType" = "text.plist.xml";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"86E76DCFD8B38CD6265704AD" = {
+			"isa" = "PBXGroup";
+			"name" = "Docs";
+			"children" = (
+				"AA29C1F0BAF664EEBF46DF90",
+				"59D149CFC94AB2F37E6290EF",
+				"AA4ACA445B3FBAF47CDE31AC",
+				"9EDEF863666B2B2417302202",
+				"4E4CFABABA74E0E0FA7D7C71",
+				"4AB1626B9CCEF8A52C7EF27E",
+			);
+			"sourceTree" = "<group>";
+		};
+		"69D5FA1D2E947DD1130B223C" = {
+			"path" = "Resources/BrandMark.png";
+			"isa" = "PBXFileReference";
+			"name" = "BrandMark.png";
+			"lastKnownFileType" = "image.png";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"F3B6477E311C6DF08AAFAD22" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "928C52B7F49CD7141A0D9B71";
+		};
+		"F09420CEB0AD8A7598190E42" = {
+			"path" = "Scripts/prepare-resources.py";
+			"isa" = "PBXFileReference";
+			"name" = "prepare-resources.py";
+			"lastKnownFileType" = "text.script.python";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"414C4CA70D77E39DA62ED8F4" = {
+			"path" = "BrowserExtension/player.js";
+			"isa" = "PBXFileReference";
+			"name" = "player.js";
+			"lastKnownFileType" = "sourcecode.javascript";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"DDF05173B376DE398B5EAD82" = {
+			"isa" = "PBXGroup";
+			"name" = "Widget";
+			"children" = (
+				"F371C043E744A58531A0CC9D",
+			);
+			"sourceTree" = "<group>";
+		};
+		"D0B81B22172D3F4B8FA28A38" = {
+			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Release";
+			"buildConfigurations" = (
+				"389034BDB7D390F2555F0D15",
+				"0CC042B1E52B172CF172357B",
+			);
+		};
+		"024A2D483E40A69114F9B737" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"remoteGlobalIDString" = "92E59706452E4F3A4922375A";
+			"remoteInfo" = "LunelioBridge";
+			"proxyType" = "1";
+		};
+		"00D2CBE0BC38644714C0673A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "69D5FA1D2E947DD1130B223C";
+		};
+		"15AFF565EFBB33D6AA1324D8" = {
+			"path" = "Config/Widget.entitlements";
+			"isa" = "PBXFileReference";
+			"name" = "Widget.entitlements";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"63AB461C37BCE1F485FFE914" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DB451F7C7C6D993C3E95A016";
+		};
+		"9B40C4DF91A1A4E64DC43B0B" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG $(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"PRODUCT_MODULE_NAME" = "LunelioTests";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SKIP_INSTALL" = "YES";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.LunelioTests";
+				"ENABLE_TESTABILITY" = "YES";
+				"PRODUCT_NAME" = "LunelioTests";
+			};
+			"name" = "Debug";
+		};
+		"C659B8697B57D4DFCF17E666" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "AEB616C7E077313FE591F2DC";
+		};
+		"B023CA8F0F68491740229B47" = {
+			"isa" = "PBXGroup";
+			"name" = "Tools";
+			"children" = (
+				"01902318EE09285E30261797",
+				"4E9C90413E1FD964AEE1B7CC",
+				"1E08C0D1B9C04FC2FE0FA194",
+				"B1593521D05BBB7C0A1196D0",
+				"0C858C471DB65EF3B384B05D",
+				"F09420CEB0AD8A7598190E42",
+			);
+			"sourceTree" = "<group>";
+		};
+		"3F0E00D721AF80760CF39AD4" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B8A870DA94BDEA4A68C6B33F";
+		};
+		"3B3C68D3F32942981D89CE86" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "49890BE777B686F6FB809B2B";
+		};
+		"54C71EC75A94DDEC6BCB77C3" = {
+			"path" = "BrowserExtension/icons/icon32.png";
+			"isa" = "PBXFileReference";
+			"name" = "icon32.png";
+			"lastKnownFileType" = "image.png";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"6677DA9DA3AE7BE908E147D8" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E0E27618A2D2A8FEBDD49F35";
+		};
+		"19584F9AEEAC24FC4A2A9ECF" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1BD1A2F8424FB5E7A03B8297";
+			"settings" = {
+				"ATTRIBUTES" = (
+					"CodeSignOnCopy",
+					"RemoveHeadersOnCopy",
+				);
+			};
+		};
+		"0CC042B1E52B172CF172357B" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited)";
+				"EXECUTABLE_NAME" = "SpotifyMini";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/App.entitlements";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"PRODUCT_MODULE_NAME" = "SpotifyMini";
+				"INFOPLIST_FILE" = "Config/App-Info.plist";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "LunelioIcon";
+				"LD_RUNPATH_SEARCH_PATHS" = "$(inherited) @executable_path/../Frameworks";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"PRODUCT_NAME" = "Lunelio";
+			};
+			"name" = "Release";
+		};
+		"1E08C0D1B9C04FC2FE0FA194" = {
+			"path" = "Scripts/prepare-local-token.py";
+			"isa" = "PBXFileReference";
+			"name" = "prepare-local-token.py";
+			"lastKnownFileType" = "text.script.python";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"BC51AD30481089437AAAF42D" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "69D5FA1D2E947DD1130B223C";
+		};
+		"10BEF5A85FCF4FB123E76086" = {
+			"path" = "Resources/extension-id.txt";
+			"isa" = "PBXFileReference";
+			"name" = "extension-id.txt";
+			"lastKnownFileType" = "text";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"B857E870B0D950E97092515E" = {
+			"productType" = "com.apple.product-type.application";
+			"productReference" = "F9CDCD16DBDDA0F9FD9EC38F";
+			"buildConfigurationList" = "D0B81B22172D3F4B8FA28A38";
+			"productName" = "Lunelio";
+			"isa" = "PBXNativeTarget";
+			"buildPhases" = (
+				"2C277EED17662010128DA21F",
+				"68B33664AF995AEBF6BF3543",
+				"7AB8E422B2C759ECB40AA62F",
+				"AA57B07521E5257EA2F297C4",
+				"9BED4842D12F6AA19F285544",
+			);
+			"dependencies" = (
+				"DD069459D49B1BEFA2F13F77",
+				"8FE2AA60C1A3129E599E3B20",
+				"02CECAEE4FFB412D30DF1EA4",
+			);
+			"name" = "Lunelio";
+			"buildRules" = (
+			);
+		};
+		"928C52B7F49CD7141A0D9B71" = {
+			"path" = "build/ChromeExtension";
+			"isa" = "PBXFileReference";
+			"name" = "ChromeExtension";
+			"lastKnownFileType" = "folder";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"30CA46B11CDE667766913567" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "628F709C380D84BD5390913A";
+		};
+		"24676C865D709C470DDBCA1A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "10BEF5A85FCF4FB123E76086";
+		};
+		"B92CA4A4DAA276402D902434" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F6E7A625BDCA9C05984BCBD0";
+		};
+		"9EDEF863666B2B2417302202" = {
+			"path" = "Docs/Editing in Xcode.md";
+			"isa" = "PBXFileReference";
+			"name" = "Editing in Xcode.md";
+			"lastKnownFileType" = "net.daringfireball.markdown";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"53C1EFFF7D8BAECD3FD3901F" = {
+			"isa" = "PBXGroup";
+			"name" = "Browser Extension";
+			"children" = (
+				"34E2E1B5FD73B50497E53F8B",
+				"E1E153FFE29632A08C7172A7",
+				"C1CA6B38D5D165075D849EAF",
+				"54C71EC75A94DDEC6BCB77C3",
+				"753FF4423EA99986CA019020",
+				"88FBF52DF69416B6CC21A7AB",
+				"414C4CA70D77E39DA62ED8F4",
+				"9F20B090FB6229D9738AE482",
+				"12EF1480B8F54B2E8526AE84",
+				"6BE950D25A79D785300A51B0",
+			);
+			"sourceTree" = "<group>";
+		};
+		"2F99FBF150572144C1D424B7" = {
+			"path" = "Sources/App/App.swift";
+			"isa" = "PBXFileReference";
+			"name" = "App.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"50691A310B2215490A8FB848" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E21DD41955D56691DF077A67";
+		};
+		"759B54273EBC5C4B4742A0BC" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D3E6E81A3FFA05B43FD40DC6";
+		};
+		"D3E6E81A3FFA05B43FD40DC6" = {
+			"path" = "Tests/LunelioTests/PlaybackTests.swift";
+			"isa" = "PBXFileReference";
+			"name" = "PlaybackTests.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"8A1CC9620D38664B7659342E" = {
+			"path" = "Tests/BuildScripts/test_prepare_resources.py";
+			"isa" = "PBXFileReference";
+			"name" = "test_prepare_resources.py";
+			"lastKnownFileType" = "text.script.python";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"683FC8107951B9470155663B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DB451F7C7C6D993C3E95A016";
+		};
+		"AA4ACA445B3FBAF47CDE31AC" = {
+			"path" = "README.md";
+			"isa" = "PBXFileReference";
+			"name" = "README.md";
+			"lastKnownFileType" = "net.daringfireball.markdown";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"B7857D5CBD0684E22140306A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D995C0480D74F7E15EFA0634";
+		};
+		"B82F6A9E9CED634F1F84DF2D" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "527B38E97EFC2DCC418C85BC";
+		};
+		"389034BDB7D390F2555F0D15" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"LD_RUNPATH_SEARCH_PATHS" = "$(inherited) @executable_path/../Frameworks";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG $(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"INFOPLIST_FILE" = "Config/App-Info.plist";
+				"PRODUCT_MODULE_NAME" = "SpotifyMini";
+				"ENABLE_TESTABILITY" = "YES";
+				"EXECUTABLE_NAME" = "SpotifyMini";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/App.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "LunelioIcon";
+				"PRODUCT_NAME" = "Lunelio";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini";
+			};
+			"name" = "Debug";
+		};
+		"628F709C380D84BD5390913A" = {
+			"path" = ".local/bridge-token.txt";
+			"isa" = "PBXFileReference";
+			"name" = "bridge-token.txt";
+			"lastKnownFileType" = "text";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"6471195385C07E7FB30EC302" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F360AC260A2DB32EAFCDB36E";
+		};
+		"5D911DDA0A4F70029B10678B" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "C9167A22A6D40907202AE081";
+			"targetProxy" = "9477500E2AEC9666F916A035";
+		};
+		"A9DD297AC466B8C891118663" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited)";
+			};
+			"name" = "Release";
+		};
+		"5DDDD65D45417BB4DA58A17F" = {
+			"path" = "Config/Project.xcconfig";
+			"isa" = "PBXFileReference";
+			"name" = "Project.xcconfig";
+			"lastKnownFileType" = "text.xcconfig";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"92E59706452E4F3A4922375A" = {
+			"productType" = "com.apple.product-type.tool";
+			"productReference" = "602E88C3E958B19F15B7B818";
+			"buildConfigurationList" = "6C687E9079BE25B69BAA7A9F";
+			"productName" = "SpotifyMiniBridge";
+			"isa" = "PBXNativeTarget";
+			"buildPhases" = (
+				"7FD01B10DF6BCFBA0BF2B2BA",
+				"D48B653E84B20D746B43A581",
+			);
+			"dependencies" = (
+			);
+			"name" = "LunelioBridge";
+			"buildRules" = (
+			);
+		};
+		"307504367F094812F5CCC40E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1C512A53A11000B9ACE9B332";
+		};
+		"B3CE8C6D49E1667D18EA6618" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6753EAA22E1DA11DB59DF0A5";
+		};
+		"35BC64DD73D5A9E454684AC6" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "DB451F7C7C6D993C3E95A016";
+		};
+		"8325B854FF3755D23631503E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E21DD41955D56691DF077A67";
+		};
+		"34E2E1B5FD73B50497E53F8B" = {
+			"path" = "BrowserExtension/content-tail.js";
+			"isa" = "PBXFileReference";
+			"name" = "content-tail.js";
+			"lastKnownFileType" = "sourcecode.javascript";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"12EF1480B8F54B2E8526AE84" = {
+			"path" = "BrowserExtension/popup.js";
+			"isa" = "PBXFileReference";
+			"name" = "popup.js";
+			"lastKnownFileType" = "sourcecode.javascript";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"DD069459D49B1BEFA2F13F77" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "CB26E6A1B03D43B728FF378B";
+			"targetProxy" = "12CDEFCB867756A224AD6792";
+		};
+		"633A5D756662D3E2958D90CE" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "527B38E97EFC2DCC418C85BC";
+		};
+		"8CD810B8A866914C90A35A59" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"LD_RUNPATH_SEARCH_PATHS" = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"APPLICATION_EXTENSION_API_ONLY" = "YES";
+				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
+				"SKIP_INSTALL" = "YES";
+				"PRODUCT_MODULE_NAME" = "SpotifyMiniWidget";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "LunelioIcon";
+				"PRODUCT_NAME" = "SpotifyMiniWidget";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini.widget";
+			};
+			"name" = "Release";
+		};
+		"602E88C3E958B19F15B7B818" = {
+			"path" = "SpotifyMiniBridge";
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "compiled.mach-o.executable";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"98F54143AB4E86B28C3AFEE0" = {
+			"buildConfigurationList" = "84BBAC37BE387BB883EA01D5";
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"knownRegions" = (
+				"en",
+				"Base",
+			);
+			"isa" = "PBXProject";
+			"compatibilityVersion" = "Xcode 14.0";
+			"productRefGroup" = "00C45FD35CB0F9C5F764F070";
+			"mainGroup" = "DF891E785808226D241F246E";
+			"developmentRegion" = "en";
+			"attributes" = {
+				"LastUpgradeCheck" = "2700";
+			};
+			"targets" = (
+				"C9167A22A6D40907202AE081",
+				"B857E870B0D950E97092515E",
+				"CB26E6A1B03D43B728FF378B",
+				"92E59706452E4F3A4922375A",
+				"2F28FAE94F7678B3679872C7",
+			);
+		};
+		"C1CA6B38D5D165075D849EAF" = {
+			"path" = "BrowserExtension/icons/icon16.png";
+			"isa" = "PBXFileReference";
+			"name" = "icon16.png";
+			"lastKnownFileType" = "image.png";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"138E0AEE4DEF76EE4CF7F508" = {
+			"name" = "Generate shared local resources";
+			"inputPaths" = (
+				"$(SRCROOT)/Config/Version.xcconfig",
+				"$(SRCROOT)/Scripts/prepare-resources.py",
+				"$(SRCROOT)/BrowserExtension/content-tail.js",
+				"$(SRCROOT)/BrowserExtension/icons/icon128.png",
+				"$(SRCROOT)/BrowserExtension/icons/icon16.png",
+				"$(SRCROOT)/BrowserExtension/icons/icon32.png",
+				"$(SRCROOT)/BrowserExtension/icons/icon48.png",
+				"$(SRCROOT)/BrowserExtension/manifest.template.json",
+				"$(SRCROOT)/BrowserExtension/player.js",
+				"$(SRCROOT)/BrowserExtension/popup.html",
+				"$(SRCROOT)/BrowserExtension/popup.js",
+				"$(SRCROOT)/BrowserExtension/worker.js",
+			);
+			"buildActionMask" = "2147483647";
+			"shellPath" = "/bin/bash";
+			"outputPaths" = (
+				"$(SRCROOT)/build/ChromeExtension",
+				"$(SRCROOT)/build/ChromeExtension/icons",
+				"$(SRCROOT)/build/ChromeExtension/manifest.json",
+				"$(SRCROOT)/build/ChromeExtension/content.js",
+				"$(SRCROOT)/build/ChromeExtension/worker.js",
+				"$(SRCROOT)/build/ChromeExtension/popup.html",
+				"$(SRCROOT)/build/ChromeExtension/popup.js",
+				"$(SRCROOT)/build/ChromeExtension/icons/icon16.png",
+				"$(SRCROOT)/build/ChromeExtension/icons/icon32.png",
+				"$(SRCROOT)/build/ChromeExtension/icons/icon48.png",
+				"$(SRCROOT)/build/ChromeExtension/icons/icon128.png",
+			);
+			"isa" = "PBXShellScriptBuildPhase";
+			"runOnlyForDeploymentPostprocessing" = "0";
+			"shellScript" = "set -euo pipefail\npython3 \"${SRCROOT}/Scripts/prepare-resources.py\"\n";
+			"files" = (
+			);
+			"alwaysOutOfDate" = "1";
+		};
+		"AB701DA30320AC4A89DDD749" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"6C687E9079BE25B69BAA7A9F" = {
+			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Release";
+			"buildConfigurations" = (
+				"9BC31372340E0BDFD9B7CA7C",
+				"6857BDFFE0E98E0A5795744B",
+			);
+		};
+		"0077D7268A86BEA027C7435C" = {
+			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Release";
+			"buildConfigurations" = (
+				"A567B9B95955482AE5E89B7E",
+				"8CD810B8A866914C90A35A59",
+			);
+		};
+		"BE51D8D2FF3A26D2F5519FB5" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"26B7BCC8942C9CA5DE842287",
+				"365E266B5998C1CFB536BB76",
+				"2403E0090C007A44C9331617",
+				"2FFC888D4AF38A31C4FC2F93",
+				"CAD626570D6EF55DD8CC25CD",
+				"2B1A47903122B3078EBB0B0B",
+				"C659B8697B57D4DFCF17E666",
+				"759B54273EBC5C4B4742A0BC",
+				"BC230AF95694C837BF8964D2",
+				"8325B854FF3755D23631503E",
+				"B82F6A9E9CED634F1F84DF2D",
+				"3F0E00D721AF80760CF39AD4",
+				"683FC8107951B9470155663B",
+				"B1E9387041DD2728C2512EDD",
+				"B92CA4A4DAA276402D902434",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"3A585FA15D66223CDC83266F" = {
+			"isa" = "PBXGroup";
+			"name" = "Design";
+			"children" = (
+				"14B18E9CC7F75FE3864746DA",
+				"F005B45898455727DBF7D063",
+			);
+			"sourceTree" = "<group>";
+		};
+		"4AB1626B9CCEF8A52C7EF27E" = {
+			"path" = "Docs/Start Here.md";
+			"isa" = "PBXFileReference";
+			"name" = "Start Here.md";
+			"lastKnownFileType" = "net.daringfireball.markdown";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"F9CDCD16DBDDA0F9FD9EC38F" = {
+			"path" = "Lunelio.app";
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"CB26E6A1B03D43B728FF378B" = {
+			"productType" = "com.apple.product-type.app-extension";
+			"productReference" = "1BD1A2F8424FB5E7A03B8297";
+			"buildConfigurationList" = "0077D7268A86BEA027C7435C";
+			"productName" = "SpotifyMiniWidget";
+			"isa" = "PBXNativeTarget";
+			"buildPhases" = (
+				"71FC9CDFCE465497BC8272AE",
+				"BF4CD3EA3535E97954ED6FE8",
+				"DA609DED046E6323D32FEE24",
+			);
+			"dependencies" = (
+				"5D911DDA0A4F70029B10678B",
+			);
+			"name" = "LunelioWidget";
+			"buildRules" = (
+			);
+		};
+		"F005B45898455727DBF7D063" = {
+			"path" = "Design/Previews";
+			"isa" = "PBXFileReference";
+			"name" = "Previews";
+			"lastKnownFileType" = "folder";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"B1593521D05BBB7C0A1196D0" = {
+			"path" = "Scripts/register-development-build.sh";
+			"isa" = "PBXFileReference";
+			"name" = "register-development-build.sh";
+			"lastKnownFileType" = "text.script.sh";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"28B0AA199F3BA10A3179C509" = {
+			"isa" = "XCConfigurationList";
+			"defaultConfigurationIsVisible" = "0";
+			"defaultConfigurationName" = "Release";
+			"buildConfigurations" = (
+				"9B40C4DF91A1A4E64DC43B0B",
+				"369CB9AEEF10065E0C6F673A",
+			);
+		};
+		"88FBF52DF69416B6CC21A7AB" = {
+			"path" = "BrowserExtension/manifest.template.json";
+			"isa" = "PBXFileReference";
+			"name" = "manifest.template.json";
+			"lastKnownFileType" = "text.json";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"44C7E229889FE9D1BB841A79" = {
+			"isa" = "PBXGroup";
+			"name" = "Shared";
+			"children" = (
+				"2B24E5DF819E24531C697495",
+				"E21DD41955D56691DF077A67",
+				"527B38E97EFC2DCC418C85BC",
+				"B8A870DA94BDEA4A68C6B33F",
+				"DB451F7C7C6D993C3E95A016",
+				"49890BE777B686F6FB809B2B",
+				"F360AC260A2DB32EAFCDB36E",
+			);
+			"sourceTree" = "<group>";
+		};
+		"BC230AF95694C837BF8964D2" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "2B24E5DF819E24531C697495";
+		};
+		"A4E147F53C5761D1B4E6BAF6" = {
+			"path" = "Config/App.entitlements";
+			"isa" = "PBXFileReference";
+			"name" = "App.entitlements";
+			"lastKnownFileType" = "text.plist.entitlements";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"527B38E97EFC2DCC418C85BC" = {
+			"path" = "Sources/Shared/LocalBridge.swift";
+			"isa" = "PBXFileReference";
+			"name" = "LocalBridge.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"A9012353AFD6A66EB75D4BE2" = {
+			"isa" = "PBXGroup";
+			"name" = "Sources";
+			"children" = (
+				"1C48CE29E4E135EE62951B22",
+				"DDF05173B376DE398B5EAD82",
+				"44C7E229889FE9D1BB841A79",
+				"A64E97F5D7DFA373DF18116D",
+			);
+			"sourceTree" = "<group>";
+		};
+		"9BED4842D12F6AA19F285544" = {
+			"buildActionMask" = "2147483647";
+			"dstSubfolderSpec" = "6";
+			"isa" = "PBXCopyFilesBuildPhase";
+			"runOnlyForDeploymentPostprocessing" = "0";
+			"dstPath" = "";
+			"name" = "Embed Chrome Native Helper";
+			"files" = (
+				"1406DDD0C9186E133CF00FFF",
+			);
+		};
+		"0C858C471DB65EF3B384B05D" = {
+			"path" = "Tools/CreateIcons.swift";
+			"isa" = "PBXFileReference";
+			"name" = "CreateIcons.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"F360AC260A2DB32EAFCDB36E" = {
+			"path" = "Sources/Shared/PlayerCommand.swift";
+			"isa" = "PBXFileReference";
+			"name" = "PlayerCommand.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"E1E153FFE29632A08C7172A7" = {
+			"path" = "BrowserExtension/icons/icon128.png";
+			"isa" = "PBXFileReference";
+			"name" = "icon128.png";
+			"lastKnownFileType" = "image.png";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"7A724B88509D867FDEAA9B6A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "527B38E97EFC2DCC418C85BC";
+		};
+		"DB451F7C7C6D993C3E95A016" = {
+			"path" = "Sources/Shared/Playback.swift";
+			"isa" = "PBXFileReference";
+			"name" = "Playback.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"C23108729D1809B8323E9806" = {
+			"isa" = "PBXGroup";
+			"name" = "Configuration";
+			"children" = (
+				"F8B136C2FFBC6429D3F7E7FF",
+				"A4E147F53C5761D1B4E6BAF6",
+				"5DDDD65D45417BB4DA58A17F",
+				"F8520349AD08FA9A2DCE3181",
+				"646A36D3D0F68D9DF6EBCBEB",
+				"15AFF565EFBB33D6AA1324D8",
+			);
+			"sourceTree" = "<group>";
+		};
+		"6857BDFFE0E98E0A5795744B" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"PRODUCT_MODULE_NAME" = "SpotifyMiniBridge";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"SKIP_INSTALL" = "YES";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini.bridge";
+				"PRODUCT_NAME" = "SpotifyMiniBridge";
+			};
+			"name" = "Release";
+		};
+		"C9167A22A6D40907202AE081" = {
+			"productName" = "PrepareResources";
+			"isa" = "PBXAggregateTarget";
+			"buildConfigurationList" = "19A9076371E86FCCE163292A";
+			"name" = "PrepareResources";
+			"buildPhases" = (
+				"138E0AEE4DEF76EE4CF7F508",
+			);
+			"dependencies" = (
+			);
+		};
+		"DA609DED046E6323D32FEE24" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"6677DA9DA3AE7BE908E147D8",
+				"00D2CBE0BC38644714C0673A",
+				"041DDB58E014BC1D873A1B7E",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"A024F06580C79B7582C3806A" = {
+			"isa" = "PBXGroup";
+			"name" = "Resources";
+			"children" = (
+				"E0E27618A2D2A8FEBDD49F35",
+				"69D5FA1D2E947DD1130B223C",
+				"1C512A53A11000B9ACE9B332",
+				"10BEF5A85FCF4FB123E76086",
+			);
+			"sourceTree" = "<group>";
+		};
+		"45FD7A750BD8CAC0E62B317D" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E21DD41955D56691DF077A67";
+		};
+		"2B24E5DF819E24531C697495" = {
+			"path" = "Sources/Shared/BridgeRequest.swift";
+			"isa" = "PBXFileReference";
+			"name" = "BridgeRequest.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"E21DD41955D56691DF077A67" = {
+			"path" = "Sources/Shared/BrowserMessage.swift";
+			"isa" = "PBXFileReference";
+			"name" = "BrowserMessage.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"44647A9CF4EE1008D10339D7" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"remoteGlobalIDString" = "C9167A22A6D40907202AE081";
+			"remoteInfo" = "PrepareResources";
+			"proxyType" = "1";
+		};
+		"BF4CD3EA3535E97954ED6FE8" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"9F20B090FB6229D9738AE482" = {
+			"path" = "BrowserExtension/popup.html";
+			"isa" = "PBXFileReference";
+			"name" = "popup.html";
+			"lastKnownFileType" = "text";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"B1E9387041DD2728C2512EDD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F360AC260A2DB32EAFCDB36E";
+		};
+		"ECC21D03BE69300E07E47BF5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F371C043E744A58531A0CC9D";
+		};
+		"D226C23BC0F1BDF931EF1C2C" = {
+			"path" = "Tests/LunelioTests/BridgeProtocolTests.swift";
+			"isa" = "PBXFileReference";
+			"name" = "BridgeProtocolTests.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"B8A870DA94BDEA4A68C6B33F" = {
+			"path" = "Sources/Shared/NativeFrameParser.swift";
+			"isa" = "PBXFileReference";
+			"name" = "NativeFrameParser.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"F4C311282BA0736FA9A46243" = {
+			"baseConfigurationReference" = "5DDDD65D45417BB4DA58A17F";
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG $(inherited)";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"F6E7A625BDCA9C05984BCBD0" = {
+			"path" = "Sources/App/BrowserPlayback.swift";
+			"isa" = "PBXFileReference";
+			"name" = "BrowserPlayback.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"CA8C6CD8B02FEA8DE8D57663" = {
+			"path" = "Sources/App/BrowserConnector.swift";
+			"isa" = "PBXFileReference";
+			"name" = "BrowserConnector.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"2F28FAE94F7678B3679872C7" = {
+			"productType" = "com.apple.product-type.bundle.unit-test";
+			"productReference" = "44F7D1F6A3DDAC9085BD2A43";
+			"buildConfigurationList" = "28B0AA199F3BA10A3179C509";
+			"productName" = "LunelioTests";
+			"isa" = "PBXNativeTarget";
+			"buildPhases" = (
+				"BE51D8D2FF3A26D2F5519FB5",
+				"AB701DA30320AC4A89DDD749",
+			);
+			"dependencies" = (
+			);
+			"name" = "LunelioTests";
+			"buildRules" = (
+			);
+		};
+		"7AB8E422B2C759ECB40AA62F" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"4242D0D062D5D7C8145C5537",
+				"BC51AD30481089437AAAF42D",
+				"307504367F094812F5CCC40E",
+				"24676C865D709C470DDBCA1A",
+				"30CA46B11CDE667766913567",
+				"F3B6477E311C6DF08AAFAD22",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"1406DDD0C9186E133CF00FFF" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "602E88C3E958B19F15B7B818";
+			"settings" = {
+				"ATTRIBUTES" = (
+					"CodeSignOnCopy",
+					"RemoveHeadersOnCopy",
+				);
+			};
+		};
+		"71FC9CDFCE465497BC8272AE" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = "2147483647";
+			"files" = (
+				"ECC21D03BE69300E07E47BF5",
+				"7A724B88509D867FDEAA9B6A",
+				"59AAF3E1D9E014C08411952C",
+				"162319CC4D27E90869EAAF1C",
+				"52EF79F58739615F746EABAC",
+			);
+			"runOnlyForDeploymentPostprocessing" = "0";
+		};
+		"CDD640657B18B0025DC5D801" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "527B38E97EFC2DCC418C85BC";
+		};
+		"02CECAEE4FFB412D30DF1EA4" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "C9167A22A6D40907202AE081";
+			"targetProxy" = "44647A9CF4EE1008D10339D7";
+		};
+		"44F7D1F6A3DDAC9085BD2A43" = {
+			"path" = "LunelioTests.xctest";
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+	};
+	"rootObject" = "98F54143AB4E86B28C3AFEE0";
+}

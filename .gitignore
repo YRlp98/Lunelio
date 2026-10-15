@@ -1,0 +1,17 @@
+.DS_Store
+build/
+.local/
+Lunelio.app
+Spotify Mini.app
+**/xcuserdata/
+*.xcuserstate
+__pycache__/
+*.py[cod]
+ChromeExtension
+
+# Keep archived logo drafts local.
+/Design/Branding/*
+!/Design/Branding/Selected/
+/Design/Branding/Selected/*
+!/Design/Branding/Selected/AppIcon-1024.png
+!/Design/Branding/Selected/BrandMark.svg
