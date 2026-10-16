@@ -1,24 +1,41 @@
-<p align="center">
-  <img src="Design/Branding/Selected/AppIcon-1024.png" alt="Lunelio app icon" width="120" height="120">
-</p>
+<h1>
+  <img src="Design/Branding/Selected/AppIcon-1024.png" alt="Lunelio app icon" width="80" height="80" align="middle">
+  Lunelio
+</h1>
 
-# Lunelio
+A small macOS widget for [Spotify Desktop](https://www.spotify.com/download/mac/) and the [Spotify web player](https://open.spotify.com/).
 
-**Tiny but handy.**
+Free to use, with all features included. No Spotify Premium subscription or API key required by Lunelio. Spotify’s own playback rules still apply.
 
-A small macOS widget for [Spotify Desktop](https://www.spotify.com/download/mac/) and the [Spotify web player](https://open.spotify.com) in Chrome, with support for more browsers planned. See what’s playing, pause, skip, and seek from your desktop or Notification Center.
+See what’s playing, pause, skip, and seek from your desktop or Notification Center.
 
-Free to use. No Spotify Premium subscription or API key required by Lunelio; Spotify’s playback rules still apply.
+[![Release](https://img.shields.io/badge/release-v0.0.6--beta-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta)
+[![License: MIT](https://img.shields.io/badge/license-MIT-1DB954?style=flat-square)](LICENSE)
+[![Star on GitHub](https://img.shields.io/badge/GitHub-star-181717?style=flat-square&logo=github)](https://github.com/YRlp98/Lunelio/stargazers)
+[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-555555?style=flat-square&logo=apple)](#current-support)
 
-**macOS 14 or later · 0.0.6-beta**
+[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta)
 
-New in this beta: restart a song from the progress bar, with targets from 0% through 100% in 10% steps. See the [changelog](CHANGELOG.md).
+![Lunelio’s small, medium, and large widgets on the macOS desktop, with the medium widget also in Notification Center](Docs/Images/lunelio-desktop.jpg)
+
+## Current support
+
+- **macOS 14 or later.** Support for other operating systems is planned.
+- **Spotify Desktop and the Spotify web player in Google Chrome.** More browsers are planned.
+
+Current release: **[0.0.6-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta)** · [Changelog](CHANGELOG.md)
+
+## Features
+
+- Small, medium, and large widgets with album artwork, song details, and track progress.
+- Play/pause, previous, and next controls.
+- Click the progress bar to seek in 10% steps, from 0% to 100%.
+- Automatic switching between Spotify Desktop and Chrome based on what’s playing.
+- Start at login and hide the menu-bar icon from Settings.
+
+I’m actively improving Lunelio and adding more features.
 
 ## Preview
-
-<p align="center">
-  <img src="Docs/Images/widget-medium.png" alt="Lunelio’s medium widget showing album artwork, track progress, and Spotify playback controls" width="600">
-</p>
 
 <details>
   <summary>See the small and large widgets, menu, and Settings</summary>
@@ -38,11 +55,11 @@ New in this beta: restart a song from the progress bar, with targets from 0% thr
 
 <!-- Add a demo GIF here when available. -->
 
-## Get started
+## How to use
 
 Download **[Lunelio-0.0.6-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.0.6-beta/Lunelio-0.0.6-beta.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
 
-This beta is not notarized yet. See the [installation guide](Docs/Installing%20Lunelio.md) if macOS blocks it. Then:
+This beta is not notarized yet. See the [installation guide](Docs/Installing%20Lunelio.md) if macOS blocks it.
 
 1. Open **Lunelio**.
 2. Right-click your desktop → **Edit Widgets → Lunelio** and add a small, medium, or large widget. You can also add it in Notification Center.
@@ -53,32 +70,21 @@ This beta is not notarized yet. See the [installation guide](Docs/Installing%20L
 1. Download and open [Spotify’s native Mac app](https://www.spotify.com/download/mac/).
 2. In Lunelio Settings, click **Connect Spotify Desktop** and allow Lunelio to control Spotify when macOS asks.
 
-No browser extension needed. If you previously denied access, enable **Lunelio → Spotify** in **System Settings → Privacy & Security → Automation**.
+No browser extension is needed.
 
-### Spotify in Chrome
+### Spotify web player in Chrome
 
 1. In Lunelio Settings, click **Add Chrome connector** to reveal the connector folder.
 2. Open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select that folder.
 3. Open [Spotify’s web player](https://open.spotify.com) and reload the tab once.
 
-This also works with the [Spotify web player](https://open.spotify.com) installed as a Chrome web app.
+This also works with Spotify installed as a Chrome web app. Choose **Automatic** in Settings to follow the playing source; Spotify Desktop takes priority when both are playing.
 
-## Everyday use
-
-- **Play/pause and skip:** use the playback buttons.
-- **Seek:** click along the progress bar.
-- **Open Spotify:** click the cover, or the play button when no player is connected.
-- **Settings:** click **•••**. You can hide the menu-bar icon or start the connection at login.
-
-Choose **Automatic**, **Spotify Desktop**, or **Spotify in Chrome** in Settings. Automatic follows the playing source, with Desktop taking priority when both are playing.
-
-macOS may delay widget updates. Other browsers, music services, iOS, and iPadOS are not supported yet.
+Click the cover to open Spotify, or **•••** for Settings. macOS may delay widget updates.
 
 ## Development
 
-Open **Lunelio.xcodeproj**, choose **Lunelio → My Mac**, and press **⌘R** to build and run. Use **⌘U** for Swift tests. Local builds do not require a paid Apple developer account.
-
-From the project folder:
+Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** to run or **⌘U** to test. From the project folder:
 
 ```sh
 ./build.command   # Build the app
@@ -86,6 +92,10 @@ From the project folder:
 ./package.command # Create the beta installer in build/Downloads/
 ```
 
-Edit **BrowserExtension/** for browser changes, then rebuild and reload the connector and Spotify tab. Edit **Config/Version.xcconfig** to update the shared app, widget, and connector version.
+The app, widget, and connector share their version in **Config/Version.xcconfig**.
 
 See [Editing in Xcode](Docs/Editing%20in%20Xcode.md) for the code map and [Release Guide](Docs/Release%20Guide.md) for distribution details.
+
+## Donate
+
+If you’d like to support Lunelio’s development, donation links will be added here.
