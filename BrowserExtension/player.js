@@ -12,7 +12,23 @@
   const title = text('[data-testid="context-item-info-title"]') || metadata?.title || '';
   const artist = [...root.querySelectorAll('a[href*="/artist/"]')]
     .map(element => element.textContent.trim()).filter(Boolean).join(', ') || metadata?.artist || '';
-  const art = root.querySelector('img')?.src || metadata?.artwork?.[0]?.src || '';
+  const image = root.querySelector('img');
+  let art = image?.currentSrc || image?.src || '';
+  let pixels = (image?.naturalWidth || 0) * (image?.naturalHeight || 0);
+  // Media Session can provide larger covers; ignore it while it describes another song.
+  if (metadata?.title === title) {
+    for (const candidate of metadata.artwork || []) {
+      for (const size of (candidate.sizes || '').split(/\s+/)) {
+        const match = /^(\d+)[xX](\d+)$/.exec(size);
+        const area = match ? Number(match[1]) * Number(match[2]) : 0;
+        if (candidate.src && Number.isFinite(area) && area > pixels) {
+          art = candidate.src;
+          pixels = area;
+        }
+      }
+    }
+    art ||= metadata.artwork?.[0]?.src || '';
+  }
   const titleLink = root.querySelector('[data-testid="context-item-info-title"]')?.closest('a[href]') ||
     [...root.querySelectorAll('a[href]')].find(link => link.textContent.trim() === title);
   let trackURL = titleLink?.href ||

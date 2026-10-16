@@ -26,6 +26,8 @@ The unhosted test bundle compiles the same shared and browser-selection source f
 
 Shared settings live in **Config/Project.xcconfig**, versions in **Config/Version.xcconfig**, and bundle metadata/entitlements in **Config/**. The app and helper retain their internal executable/module names for compatibility with installed widgets and the existing connector.
 
+When adding a widget size, increase **CURRENT_PROJECT_VERSION**, then rebuild and run the app. macOS can cache the available sizes for an existing build; close and reopen Edit Widgets after installing the new build.
+
 ## Icons and previews
 
 **Resources/Assets.xcassets** is the app icon catalog. **BrandMark.png** supplies the widget’s empty artwork and settings; **MenuBarIcon.png** is a monochrome template. All earlier concepts remain in **Design/Branding/**, and reference widget images are in **Design/Previews/**.

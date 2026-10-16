@@ -1,12 +1,14 @@
 # Preparing Lunelio for public release
 
-Run **./package.command** to create **build/Downloads/Lunelio-0.0.3-beta.dmg** and its SHA-256 checksum. The disk image includes the complete app, embedded widget, native helper, Chrome connector, an Applications shortcut, user instructions, and the MIT license. The app also includes the license in its resources. All three executables contain Apple silicon and Intel binaries.
+Run **./package.command** to create **build/Downloads/Lunelio-0.0.5-beta.dmg** and its SHA-256 checksum. The disk image includes the complete app, embedded widget, native helper, Chrome connector, an Applications shortcut, user instructions, and the MIT license. The app also includes the license in its resources. All three executables contain Apple silicon and Intel binaries.
 
 The packager uses a separate app copy, replaces the development connection token with a fresh package token, and signs the helper, widget, and app locally. It checks matching versions, architectures, signatures, and the disk image. It does not change the running development app or its compatibility links.
 
 ## Beta downloads
 
-Publish each beta through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The current release tag is **v0.0.3-beta**. Keep the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that this beta is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
+Publish each beta through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The current release tag is **v0.0.5-beta**. Keep the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that this beta is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
+
+Record each release in [CHANGELOG.md](../CHANGELOG.md). Replace its Unreleased label with the publication date and copy that version’s changes into the GitHub release notes. Keep beta releases marked as pre-releases.
 
 Installation on a clean Mac, Intel runtime behavior, and restart recovery still need testing before recommending the beta broadly. The Chrome connector remains an unpacked installation until it is published to the Chrome Web Store.
 
@@ -29,7 +31,7 @@ Chrome documentation: [Publishing](https://developer.chrome.com/docs/webstore/pu
 
 Choose permanent bundle identifiers before release. Use your Apple Developer ID certificate to sign the helper, widget extension, and containing app, in that order, with hardened runtime and a secure timestamp. Preserve the widget’s sandbox and network-client entitlements, the app’s Apple events entitlement, and its NSAppleEventsUsageDescription for the desktop connection. Config/Project.xcconfig currently configures ad hoc local signing. Set the native targets’ distribution signing and hardened runtime settings for public releases; preserve the widget’s entitlements. The current beta packager re-signs its staged copy locally, so replace that signing step with Developer ID signing before notarizing a public build.
 
-Notarize the final signed package using Apple’s notary service, staple the accepted ticket, then verify installation and Gatekeeper acceptance on a clean Mac. Test opening the app from Applications, connecting Spotify Desktop with allowed and denied Automation permission, installing the browser connector, adding both widget sizes, switching sources, and controlling playback. Build and test an Intel version too if Intel Macs will be supported.
+Notarize the final signed package using Apple’s notary service, staple the accepted ticket, then verify installation and Gatekeeper acceptance on a clean Mac. Test opening the app from Applications, connecting Spotify Desktop with allowed and denied Automation permission, installing the browser connector, adding all three widget sizes, switching sources, and controlling playback. Build and test an Intel version too if Intel Macs will be supported.
 
 Apple documentation: [Developer ID](https://developer.apple.com/developer-id/), [Notarizing macOS software](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution).
 

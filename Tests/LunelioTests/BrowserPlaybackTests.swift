@@ -1,4 +1,5 @@
 import Foundation
+import JavaScriptCore
 import Testing
 
 @Test("Profile selection, delivery, acknowledgements, and disconnect")
@@ -63,4 +64,52 @@ func browserPlaybackTests() async throws {
     _ = browser.receive(BrowserMessage(kind: "closed", session: "profile-a", tab: 7))
     #expect(!browser.hasPlayer && current.title.isEmpty)
 
+}
+
+@Test("Browser artwork selects larger covers without mixing songs or degrading the thumbnail")
+@MainActor
+func browserArtworkTests() throws {
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let source = try String(contentsOf: root.appendingPathComponent("BrowserExtension/player.js"), encoding: .utf8)
+    let thumbnail = "https://i.scdn.co/thumbnail.jpg"
+    let large = "https://i.scdn.co/large.jpg"
+    let medium = "https://i.scdn.co/medium.jpg"
+    let cases: [(String, Int, String, [[String: String]], String)] = [
+        (thumbnail, 64, "Song", [["src": medium, "sizes": "300x300"], ["src": large, "sizes": "640x640"]], large),
+        (thumbnail, 640, "Song", [["src": medium, "sizes": "300x300"]], thumbnail),
+        (thumbnail, 64, "Previous song", [["src": large, "sizes": "640x640"]], thumbnail),
+        (thumbnail, 64, "Song", [], thumbnail),
+        (thumbnail, 64, "Song", [["src": large, "sizes": "invalid any"], ["src": "", "sizes": "640x640"]], thumbnail),
+        (thumbnail, 64, "Song", [["src": large, "sizes": "32x32 512X512"], ["src": medium, "sizes": "300x300"]], large),
+        ("", 0, "Song", [["src": large]], large),
+        ("", 0, "Song", [], "")
+    ]
+    for (thumbnail, width, metadataTitle, artwork, expected) in cases {
+        let fixture: [String: Any] = ["thumbnail": thumbnail, "width": width, "metadataTitle": metadataTitle, "artwork": artwork]
+        let json = String(decoding: try JSONSerialization.data(withJSONObject: fixture), as: UTF8.self)
+        let context = try #require(JSContext())
+        context.evaluateScript("""
+            const fixture = \(json);
+            const cover = { src: fixture.thumbnail, currentSrc: fixture.thumbnail,
+              naturalWidth: fixture.width, naturalHeight: fixture.width };
+            const title = { textContent: 'Song', closest: () => null };
+            const root = {
+              querySelector: selector => selector === 'img' ? cover :
+                selector === '[data-testid="context-item-info-title"]' ? title : null,
+              querySelectorAll: () => []
+            };
+            const document = {
+              querySelector: selector => selector === '[data-testid="now-playing-bar"]' ? root : null,
+              querySelectorAll: () => []
+            };
+            const navigator = { mediaSession: { metadata: {
+              title: fixture.metadataTitle, artist: 'Artist', artwork: fixture.artwork
+            } } };
+            """)
+        let result = context.evaluateScript(source)
+        #expect(context.exception == nil, "\(context.exception?.toString() ?? "")")
+        let data = Data(try #require(result?.toString()).utf8)
+        let playback = try Playback.decode(data)
+        #expect(playback.artwork == expected)
+    }
 }
