@@ -10,9 +10,9 @@ A small macOS widget for [Spotify Desktop](https://www.spotify.com/download/mac/
 
 Free to use. No Spotify Premium subscription or API key required by Lunelio; Spotify’s playback rules still apply.
 
-**macOS 14 or later · 0.0.5-beta**
+**macOS 14 or later · 0.0.6-beta**
 
-New in this beta: a large widget, refreshed layouts, and sharper artwork. See the [changelog](CHANGELOG.md).
+New in this beta: restart a song from the progress bar, with targets from 0% through 100% in 10% steps. See the [changelog](CHANGELOG.md).
 
 ## Preview
 
@@ -40,7 +40,7 @@ New in this beta: a large widget, refreshed layouts, and sharper artwork. See th
 
 ## Get started
 
-Download **[Lunelio-0.0.5-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.0.5-beta/Lunelio-0.0.5-beta.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
+Download **[Lunelio-0.0.6-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.0.6-beta/Lunelio-0.0.6-beta.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
 
 This beta is not notarized yet. See the [installation guide](Docs/Installing%20Lunelio.md) if macOS blocks it. Then:
 

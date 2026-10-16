@@ -2,7 +2,7 @@
 
 Requires **macOS 14 or later**. The beta installer includes Apple silicon and Intel binaries. You do not need Xcode, a compiler, or a paid Spotify account to use Lunelio.
 
-1. Download **[Lunelio-0.0.5-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.0.5-beta/Lunelio-0.0.5-beta.dmg)** from the [GitHub release](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.5-beta).
+1. Download **[Lunelio-0.0.6-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.0.6-beta/Lunelio-0.0.6-beta.dmg)** from the [GitHub release](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta).
 2. Open it and drag **Lunelio** to **Applications**. Quit an older copy before replacing it.
 3. Open Lunelio from Applications, then eject the disk image.
 4. Right-click the desktop → **Edit Widgets → Lunelio** and add a small, medium, or large widget. You can also add it in Notification Center.

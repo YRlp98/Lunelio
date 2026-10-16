@@ -32,6 +32,8 @@ func spotifyDesktopTests() throws {
     #expect(SpotifyDesktop.script(for: .show) == nil)
     #expect(SpotifyDesktop.script(for: .seek50)?.contains("duration of current track") == true)
     #expect(SpotifyDesktop.script(for: .seek50)?.contains("* 50 / 100.0") == true)
+    #expect(SpotifyDesktop.script(for: .seek0)?.contains("* 0 / 100.0") == true)
+    #expect(SpotifyDesktop.script(for: .seek100)?.contains("* 100 / 100.0") == true)
 }
 
 @Test("Desktop and browser source selection honors preference and playback state")

@@ -13,7 +13,7 @@ Lunelio controls Spotify’s native desktop app or Spotify playing in Chrome or 
 
 The companion runs quietly in the background. Choose Automatic, Spotify Desktop, or Spotify in Chrome in Settings. Automatic prefers a playing source, with desktop winning ties, and falls back to the browser when desktop closes. Spotify must be open for live song information. The widget’s cover and play button open the selected Spotify app when no player is connected. With desktop connected, the cover brings that app forward. With Chrome connected, it reuses the existing Spotify window or tab and navigates to the current song.
 
-The progress bar has ten invisible seek sections. The three dots show Settings and Open Spotify inside the widget. Click the dots again to return to playback controls. These options work even when no player is connected. Settings can hide the menu-bar icon and enable starting the connection at login.
+Click along the progress bar to seek in 10% steps: 0%, 10%, 20%, through 100%. Click the start to return to 0:00. Dragging is not supported inside the widget. The three dots show Settings and Open Spotify inside the widget. Click the dots again to return to playback controls. These options work even when no player is connected. Settings can hide the menu-bar icon and enable starting the connection at login.
 
 Playback controls use Spotify’s desktop scripting controls or browser controls, depending on the selected source. Lunelio does not require a Spotify password, Web API key, or Premium subscription of its own; Spotify’s playback rules for your account still apply. macOS controls widget refresh scheduling, so song updates can be delayed.
 

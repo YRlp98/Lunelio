@@ -9,7 +9,7 @@ async function report() {
 }
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
   if (sender.id !== chrome.runtime.id || message.kind !== 'command') return;
-  if (/^seek(?:[1-9]0|100)$/.test(message.action)) {
+  if (/^seek(?:0|[1-9]0|100)$/.test(message.action)) {
     const slider = document.querySelector('[data-testid="playback-progressbar"] input[type="range"]');
     const percent = Number(message.action.slice(4));
     const min = Number(slider?.min), max = Number(slider?.max);

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.6-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta) — 2026-10-16
+
+- Restart a song at 0:00 by clicking the start of the widget’s progress bar.
+- Seek in 10% steps from 0% through 100% in small, medium, and large widgets, with Spotify Desktop or the Spotify web player in Chrome.
+
 ## [0.0.5-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.5-beta) — 2026-10-16
 
 ### Added

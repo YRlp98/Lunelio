@@ -40,8 +40,8 @@ func playbackTests() async throws {
     #expect(Playback(playing: true, position: 0, duration: 20, updated: 1010).elapsed(at: clock) == 0)
     #expect(Playback.timeLabel(0) == "0:00" && Playback.timeLabel(65.9) == "1:05")
     #expect(Playback.timeLabel(3723) == "1:02:03" && Playback.timeLabel(.infinity) == "–:––")
-    #expect(PlayerCommand.seekSteps.compactMap(\.seekPercent) == Array(stride(from: 10, through: 100, by: 10)))
-    for invalid in ["seek0", "seek-10", "seek200", "seekNaN", "seek50/next"] {
+    #expect(PlayerCommand.seekSteps.compactMap(\.seekPercent) == Array(stride(from: 0, through: 100, by: 10)))
+    for invalid in ["seek-10", "seek1", "seek01", "seek37", "seek99", "seek101", "seek110", "seek200", "seekNaN", "seek50/next"] {
         #expect(PlayerCommand(rawValue: invalid) == nil)
     }
 

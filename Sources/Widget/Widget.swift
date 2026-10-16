@@ -256,12 +256,13 @@ struct MusicWidgetView: View {
             .overlay {
                 GeometryReader { geometry in
                     HStack(spacing: 0) {
+                        // shortcut: fixed click targets until WidgetKit supports continuous slider interactions.
                         ForEach(PlayerCommand.seekSteps, id: \.rawValue) { command in
                             let percent = command.seekPercent!
-                            // ponytail: ten fixed targets; replace with a slider if WidgetKit supports one.
+                            // Half-width end targets keep the other percentages centered on the bar.
                             Button(intent: PlaybackIntent(command)) {
                                 Color.white.opacity(0.001)
-                                    .frame(width: geometry.size.width * (percent == 10 ? 0.15 : percent == 100 ? 0.05 : 0.10), height: 18)
+                                    .frame(width: geometry.size.width * (percent == 0 || percent == 100 ? 0.05 : 0.10), height: 18)
                                     .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)

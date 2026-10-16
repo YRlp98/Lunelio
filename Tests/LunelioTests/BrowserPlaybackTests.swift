@@ -41,11 +41,11 @@ func browserPlaybackTests() async throws {
     do { try await browser.send(.seek50); Issue.record("Unavailable player accepted seek") }
     catch { }
     _ = browser.receive(BrowserMessage(kind: "snapshot", session: "profile-a", snapshot: BrowserSnapshot(tab: 7, playback: decoded)))
-    async let seek: Void = browser.send(.seek50)
+    async let seek: Void = browser.send(.seek0)
     try await Task.sleep(for: .milliseconds(30))
     let seekData = browser.receive(BrowserMessage(kind: "poll", session: "profile-a"))
     let seekCommand = try JSONSerialization.jsonObject(with: seekData) as! [String: Any]
-    #expect(seekCommand["action"] as? String == "seek50" && seekCommand["tab"] as? Int == 7)
+    #expect(seekCommand["action"] as? String == "seek0" && seekCommand["tab"] as? Int == 7)
     _ = browser.receive(BrowserMessage(kind: "ack", session: "profile-a", commandID: seekCommand["id"] as? String))
     try await seek
     async let closedPlayer: Void = browser.send(.show)
@@ -64,6 +64,54 @@ func browserPlaybackTests() async throws {
     _ = browser.receive(BrowserMessage(kind: "closed", session: "profile-a", tab: 7))
     #expect(!browser.hasPlayer && current.title.isEmpty)
 
+}
+
+@Test("Browser seek commands reach both endpoints and reject invalid percentages", arguments: zip(
+    stride(from: 0, through: 100, by: 10).map { "seek\($0)" } + ["seek-10", "seek1", "seek01", "seek37", "seek99", "seek101", "seek110", "seekNaN", "seek50/next"],
+    Array(stride(from: 0, through: 100, by: 10)) + Array(repeating: -1, count: 9)
+))
+@MainActor
+func browserSeekTests(action: String, percent: Int) throws {
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let source = try String(contentsOf: root.appendingPathComponent("BrowserExtension/content-tail.js"), encoding: .utf8)
+    let context = try #require(JSContext())
+    context.evaluateScript("""
+        let listener, response;
+        const events = [];
+        function HTMLInputElement() {}
+        Object.defineProperty(HTMLInputElement.prototype, 'value', {
+          get() { return this.position; }, set(value) { this.position = value; }
+        });
+        const slider = Object.assign(new HTMLInputElement(), {
+          min: '0', max: '200000', disabled: false, position: '120000',
+          dispatchEvent(event) { events.push(event.type); }
+        });
+        const document = { querySelector: selector =>
+          selector === '[data-testid="playback-progressbar"] input[type="range"]' ? slider : null };
+        const chrome = { runtime: { id: 'test', sendMessage: async () => ({}),
+          onMessage: { addListener(callback) { listener = callback; } } } };
+        function readPlayback() { return {canControl: true, duration: 200}; }
+        function Event(type) { this.type = type; }
+        function MutationObserver() {}
+        function setInterval() {}
+        function setTimeout() {}
+        function clearTimeout() {}
+        """)
+    context.evaluateScript(source)
+    #expect(context.exception == nil, "\(context.exception?.toString() ?? "")")
+    let actionJSON = String(decoding: try JSONEncoder().encode(action), as: UTF8.self)
+    context.evaluateScript("listener({kind:'command', action:\(actionJSON)}, {id:'test'}, value => { response = value; })")
+    #expect(context.exception == nil, "\(context.exception?.toString() ?? "")")
+    let position = context.evaluateScript("Number(slider.value)")?.toDouble()
+    let eventCount = context.evaluateScript("events.length")?.toInt32()
+    if percent < 0 {
+        #expect(context.evaluateScript("response.error")?.toString() == "Unknown command")
+        #expect(position == 120_000 && eventCount == 0)
+    } else {
+        #expect(context.evaluateScript("response.playback.canControl")?.toBool() == true)
+        #expect(position == Double(percent) * 2_000)
+        #expect(context.evaluateScript("events.join(',')")?.toString() == "input,change")
+    }
 }
 
 @Test("Browser artwork selects larger covers without mixing songs or degrading the thumbnail")
