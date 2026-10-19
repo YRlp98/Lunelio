@@ -16,7 +16,7 @@ See what’s playing, pause, skip, and seek from your desktop or Notification Ce
 
 [![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta)
 
-![Lunelio’s small, medium, and large widgets on the macOS desktop, with the medium widget also in Notification Center](Docs/Images/lunelio-desktop.jpg)
+![Lunelio cover with small, medium, and large macOS widgets playing Breathing Stone by Tenno](Docs/Images/lunelio-cover.png)
 
 ## Current support
 
@@ -36,6 +36,8 @@ Current release: **[0.1.2-beta](https://github.com/YRlp98/Lunelio/releases/tag/v
 I’m actively improving Lunelio and adding more features.
 
 ## Preview
+
+![Lunelio’s small, medium, and large widgets on the macOS desktop, with the medium widget also in Notification Center](Docs/Images/lunelio-desktop.jpg)
 
 <details>
   <summary>See the small and large widgets, menu, and Settings</summary>
