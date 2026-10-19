@@ -9,12 +9,12 @@ Free to use, with all features included. No Spotify Premium subscription or API 
 
 See what’s playing, pause, skip, and seek from your desktop or Notification Center.
 
-[![Release](https://img.shields.io/badge/release-v0.0.6--beta-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta)
+[![Release](https://img.shields.io/badge/release-v0.1.2--beta-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1DB954?style=flat-square)](LICENSE)
 [![Star on GitHub](https://img.shields.io/badge/GitHub-star-181717?style=flat-square&logo=github)](https://github.com/YRlp98/Lunelio/stargazers)
 [![macOS 14+](https://img.shields.io/badge/macOS-14%2B-555555?style=flat-square&logo=apple)](#current-support)
 
-[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta)
+[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta)
 
 ![Lunelio’s small, medium, and large widgets on the macOS desktop, with the medium widget also in Notification Center](Docs/Images/lunelio-desktop.jpg)
 
@@ -23,7 +23,7 @@ See what’s playing, pause, skip, and seek from your desktop or Notification Ce
 - **macOS 14 or later.** Support for other operating systems is planned.
 - **Spotify Desktop and the Spotify web player in Google Chrome.** More browsers are planned.
 
-Current release: **[0.0.6-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta)** · [Changelog](CHANGELOG.md)
+Current release: **[0.1.2-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta)** · [Changelog](CHANGELOG.md)
 
 ## Features
 
@@ -57,7 +57,7 @@ I’m actively improving Lunelio and adding more features.
 
 ## How to use
 
-Download **[Lunelio-0.0.6-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.0.6-beta/Lunelio-0.0.6-beta.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
+Download **[Lunelio-0.1.2-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.1.2-beta/Lunelio-0.1.2-beta.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
 
 This beta is not notarized yet. See the [installation guide](Docs/Installing%20Lunelio.md) if macOS blocks it.
 
@@ -92,7 +92,7 @@ Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** t
 ./package.command # Create the beta installer in build/Downloads/
 ```
 
-The current development version is **0.1.1-beta**. The app, widget, and connector share their version in **Config/Version.xcconfig**.
+The current version is **0.1.2-beta**. The app, widget, and connector share their version in **Config/Version.xcconfig**.
 
 See [Editing in Xcode](Docs/Editing%20in%20Xcode.md) for the code map and [Release Guide](Docs/Release%20Guide.md) for distribution details.
 

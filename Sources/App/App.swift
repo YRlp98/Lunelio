@@ -110,6 +110,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         server.browserHandler = { [weak self] message in self?.model.browser.receive(message) ?? Data("{}".utf8) }
         model.browser.onOpen = { [weak self] in self?.showSetup() }
         model.start()
+        WidgetCenter.shared.reloadTimelines(ofKind: "SpotifyMiniWidget")
         if !UserDefaults.standard.bool(forKey: "setupShown") {
             showSetup(); UserDefaults.standard.set(true, forKey: "setupShown")
         }
@@ -176,6 +177,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         // Background launches and widget actions must never open a window.
+        WidgetCenter.shared.reloadTimelines(ofKind: "SpotifyMiniWidget")
         return true
     }
 }

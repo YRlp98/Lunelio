@@ -1,6 +1,13 @@
 # Changelog
 
-## 0.1.1-beta — Unreleased
+## [0.1.2-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta) — 2026-10-19
+
+- Refresh the widget after development rebuilds so an older widget process cannot leave the desktop display frozen.
+- Request fresh widget content when Lunelio starts or reopens.
+- Updated the README with a desktop screenshot, clearer setup instructions, and current download links.
+- App, widget, and Chrome connector use the same **0.1.2-beta** version.
+
+## 0.1.1-beta
 
 - Updated the shared app, widget, and Chrome connector version to 0.1.1-beta.
 

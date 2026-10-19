@@ -38,6 +38,8 @@ Run `xcrun swift Tools/CreateIcons.swift` from the project folder to regenerate 
 
 Do not edit **build/ChromeExtension/**; edit **BrowserExtension/** and rebuild. The root app links and old project-location links preserve macOS’s cached widget launch paths. Keep these links while the current installed widgets use them. The native scheme resolves its executable through the app target, so it has no personal absolute Run path.
 
+Development builds refresh any running widget process from that app and quietly reopen Lunelio to request fresh content. Use **⌘R** when changing companion code so Xcode also starts the rebuilt app.
+
 Build artifacts, connection tokens, and Xcode’s personal state are excluded from Git. The local baseline commit preserves the working prototype before this migration.
 
 ## Beta installer

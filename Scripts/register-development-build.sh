@@ -24,3 +24,4 @@ if [ ! -e "$project_dir/Spotify Mini.app" ] && [ ! -L "$project_dir/Spotify Mini
     ln -s 'Lunelio.app' "$project_dir/Spotify Mini.app"
 fi
 env -u SWIFT_DEBUG_INFORMATION_FORMAT -u SWIFT_DEBUG_INFORMATION_VERSION /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$app"
+python3 "$project_dir/Scripts/refresh-development-widget.py" "$app"
