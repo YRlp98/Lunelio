@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1-beta — Unreleased
+
+- Updated the shared app, widget, and Chrome connector version to 0.1.1-beta.
+
 ## [0.0.6-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.0.6-beta) — 2026-10-16
 
 - Restart a song at 0:00 by clicking the start of the widget’s progress bar.

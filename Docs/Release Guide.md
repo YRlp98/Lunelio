@@ -1,12 +1,12 @@
 # Preparing Lunelio for public release
 
-Run **./package.command** to create **build/Downloads/Lunelio-0.0.6-beta.dmg** and its SHA-256 checksum. The disk image includes the complete app, embedded widget, native helper, Chrome connector, an Applications shortcut, user instructions, and the MIT license. The app also includes the license in its resources. All three executables contain Apple silicon and Intel binaries.
+Run **./package.command** to create **build/Downloads/Lunelio-0.1.1-beta.dmg** and its SHA-256 checksum. The disk image includes the complete app, embedded widget, native helper, Chrome connector, an Applications shortcut, user instructions, and the MIT license. The app also includes the license in its resources. All three executables contain Apple silicon and Intel binaries.
 
 The packager uses a separate app copy, replaces the development connection token with a fresh package token, and signs the helper, widget, and app locally. It checks matching versions, architectures, signatures, and the disk image. It does not change the running development app or its compatibility links.
 
 ## Beta downloads
 
-Publish each beta through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The current release tag is **v0.0.6-beta**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that this beta is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
+Publish each beta through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The latest published release tag is **v0.0.6-beta**; the next release tag is **v0.1.1-beta**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that this beta is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
 
 Record each release in [CHANGELOG.md](../CHANGELOG.md). Replace its Unreleased label with the publication date and copy that version’s changes into the GitHub release notes. Keep beta releases marked as pre-releases.
 
