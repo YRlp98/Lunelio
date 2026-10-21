@@ -38,6 +38,7 @@ final class NativeHost {
             for frame in frames {
                 var message = try JSONDecoder().decode(BrowserMessage.self, from: frame)
                 message.session = session
+                if message.kind == "disconnect" { await close(); return }
                 if message.kind == "open" {
                     let configuration = NSWorkspace.OpenConfiguration(); configuration.activates = false
                     _ = try? await NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration)
@@ -45,13 +46,14 @@ final class NativeHost {
                 if message.kind == "snapshot" || message.kind == "ack" || message.kind == "open" || message.kind == "closed" {
                     _ = try? await post(message)
                 }
+                if message.kind == "open" { write(Data(#"{"kind":"opened"}"#.utf8)) }
             }
         } catch { await close() }
     }
 
     private func post(_ message: BrowserMessage) async throws -> Data {
         guard let url = URL(string: "http://127.0.0.1:\(LocalBridge.port)/browser") else { throw URLError(.badURL) }
-        var request = URLRequest(url: url, timeoutInterval: 2)
+        var request = URLRequest(url: url, timeoutInterval: message.kind == "poll" ? 12 : 2)
         request.httpMethod = "POST"
         request.httpBody = try JSONEncoder().encode(message)
         request.setValue(LocalBridge.token, forHTTPHeaderField: "X-Mini-Token")

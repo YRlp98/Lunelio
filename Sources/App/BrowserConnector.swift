@@ -24,7 +24,7 @@ enum BrowserConnector {
             .appendingPathComponent("Library/Application Support/Google/Chrome/NativeMessagingHosts")
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         let manifest: [String: Any] = ["name": hostName, "description": "Lunelio connection for this Mac",
-            "path": executable.deletingLastPathComponent().appendingPathComponent("SpotifyMiniBridge").path,
+            "path": executable.deletingLastPathComponent().appendingPathComponent("LunelioBridge").path,
             "type": "stdio", "allowed_origins": ["chrome-extension://\(extensionID)/"]]
         let data = try JSONSerialization.data(withJSONObject: manifest, options: [.prettyPrinted, .sortedKeys])
         try data.write(to: folder.appendingPathComponent("\(hostName).json"), options: .atomic)

@@ -28,6 +28,10 @@ def stage_app(source: Path, destination: Path) -> dict:
     for path in destination.rglob('*'):
         if path.is_symlink() and not path.resolve().is_relative_to(destination.resolve()):
             raise ValueError('The packaged app contains a link outside its bundle')
+    # Incremental Xcode builds can retain executables after a product rename.
+    for obsolete in (Path('Contents/MacOS/SpotifyMini'), Path('Contents/MacOS/SpotifyMiniBridge'),
+                     widget / 'Contents/MacOS/SpotifyMiniWidget'):
+        (destination / obsolete).unlink(missing_ok=True)
     token = str(uuid.uuid4()) + '\n'
     for path in tokens:
         (destination / path).write_text(token)
@@ -47,8 +51,8 @@ def package(root: Path) -> Path:
         version = info['CFBundleGetInfoString']
         if not version.startswith(info['CFBundleShortVersionString']) or any(c not in '0123456789abcdefghijklmnopqrstuvwxyz.-' for c in version):
             raise ValueError('Invalid release filename version')
-        binaries = [app / 'Contents/MacOS/SpotifyMini', app / 'Contents/MacOS/SpotifyMiniBridge',
-                    app / 'Contents/PlugIns/SpotifyMiniWidget.appex/Contents/MacOS/SpotifyMiniWidget']
+        binaries = [app / 'Contents/MacOS/Lunelio', app / 'Contents/MacOS/LunelioBridge',
+                    app / 'Contents/PlugIns/SpotifyMiniWidget.appex/Contents/MacOS/LunelioWidget']
         for binary in binaries:
             arches = subprocess.check_output(['lipo', '-archs', str(binary)], text=True).split()
             if set(arches) != {'arm64', 'x86_64'}:
@@ -79,6 +83,9 @@ CONNECT SPOTIFY IN CHROME (OPTIONAL)
 In Lunelio Settings, click Add Chrome connector to reveal its folder.
 Open chrome://extensions, enable Developer mode, choose Load unpacked,
 and select the revealed folder. Open https://open.spotify.com and reload once.
+Start a song in Spotify, then use the widget controls. After connector updates,
+reload your Spotify tabs. If a freshly reopened tab does not start from the
+widget, click Play in Spotify once.
 Install the app in Applications before loading the connector; Chrome keeps
 using the folder you select.
 

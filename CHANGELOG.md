@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.2.2-beta — Unreleased
+
+Includes the changes tested locally as 0.2.0-beta and 0.2.1-beta; those builds were not published.
+
+### Improved
+
+- Reduce CPU use during Chrome playback by waiting for widget commands instead of repeatedly checking for them.
+- Stop the Chrome helper and clear its playback session when the last Spotify tab closes or navigates away. Reconnect automatically when Spotify opens again.
+- Keep other open Spotify players connected and stop an idle helper after it finishes opening Settings.
+- Stop companion polling when no player is connected; resume when Spotify Desktop launches or Chrome reconnects.
+- Release the Settings window when it closes, avoid timing-only redraws, cancel completed connection timers, and cache the bundled connection token.
+- Name the app, widget, and helper processes **Lunelio**, **LunelioWidget**, and **LunelioBridge**.
+- Exclude obsolete executables left by incremental Xcode builds when packaging the renamed processes.
+- Clarify Chrome setup and reloading Spotify tabs after connector updates. The app, widget, and connector share version **0.2.2-beta**.
+
+### Validation
+
+- Tested Spotify Desktop, Spotify installed as a Chrome web app, and Spotify in a regular Chrome tab.
+- Measured about **80% lower combined app and helper CPU usage** during Chrome playback in a one-minute Debug-build test. Results may vary between Macs. RAM use was broadly unchanged.
+
+### Known limitations
+
+- A freshly reopened Spotify web tab may need one Play click inside Spotify before the widget can start playback.
+- This beta is locally signed and is not Apple-notarized. Clean-Mac installation, Intel runtime behavior, and long-session memory use still need verification.
+
 ## [0.1.2-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta) — 2026-10-19
 
 - Refresh the widget after development rebuilds so an older widget process cannot leave the desktop display frozen.

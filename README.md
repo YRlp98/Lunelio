@@ -25,6 +25,8 @@ See what’s playing, pause, skip, and seek from your desktop or Notification Ce
 
 Current release: **[0.1.2-beta](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta)** · [Changelog](CHANGELOG.md)
 
+Upcoming beta: **0.2.2-beta**, with about **80% lower CPU usage** in our short Chrome playback test, automatic helper shutdown when Spotify tabs close, and clearer setup instructions. See the [unreleased changes](CHANGELOG.md#022-beta--unreleased).
+
 ## Features
 
 - Small, medium, and large widgets with album artwork, song details, and track progress.
@@ -78,7 +80,9 @@ No browser extension is needed.
 
 1. In Lunelio Settings, click **Add Chrome connector** to reveal the connector folder.
 2. Open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select that folder.
-3. Open [Spotify’s web player](https://open.spotify.com) and reload the tab once.
+3. Open [Spotify’s web player](https://open.spotify.com), reload the tab once, and start a song in Spotify. You can then use the widget’s controls.
+
+After updating the connector, reload your Spotify tabs again. If a freshly reopened tab does not start from the widget, click Play in Spotify once.
 
 This also works with Spotify installed as a Chrome web app. Choose **Automatic** in Settings to follow the playing source; Spotify Desktop takes priority when both are playing.
 
@@ -94,7 +98,7 @@ Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** t
 ./package.command # Create the beta installer in build/Downloads/
 ```
 
-The current version is **0.1.2-beta**. The app, widget, and connector share their version in **Config/Version.xcconfig**.
+The current development version is **0.2.2-beta**. The app, widget, and connector share their version in **Config/Version.xcconfig**. The Chrome connection waits for commands during playback and exits when no Spotify tabs remain. Background polling stops when no player is connected. Both reconnect automatically.
 
 See [Editing in Xcode](Docs/Editing%20in%20Xcode.md) for the code map and [Release Guide](Docs/Release%20Guide.md) for distribution details.
 

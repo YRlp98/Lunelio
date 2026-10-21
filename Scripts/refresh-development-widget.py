@@ -8,16 +8,18 @@ from pathlib import Path
 
 
 def refresh(app: Path) -> None:
-    widget = app / 'Contents/PlugIns/SpotifyMiniWidget.appex/Contents/MacOS/SpotifyMiniWidget'
+    widget = app / 'Contents/PlugIns/SpotifyMiniWidget.appex/Contents/MacOS/LunelioWidget'
     if not widget.is_file():
         return
+    # A running process may retain the old executable path after its file is replaced.
+    legacy = widget.with_name('SpotifyMiniWidget').resolve()
     found = False
     for line in subprocess.check_output(['ps', '-axo', 'pid=,comm='], text=True).splitlines():
         fields = line.strip().split(None, 1)
         if len(fields) != 2:
             continue
         try:
-            matches = os.path.samefile(fields[1], widget)
+            matches = Path(fields[1]).resolve() == legacy or os.path.samefile(fields[1], widget)
         except OSError:
             continue
         if matches:

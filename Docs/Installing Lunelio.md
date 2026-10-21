@@ -15,6 +15,8 @@ This beta is locally signed, without Apple Developer ID signing or notarization.
 
 **Desktop:** open [Spotify’s Mac app](https://www.spotify.com/download/mac/). In Lunelio Settings, click **Connect Spotify Desktop** and allow the macOS Automation request. No extension is needed.
 
-**Chrome:** in Lunelio Settings, click **Add Chrome connector**. In `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, and select the revealed folder. Open the [Spotify web player](https://open.spotify.com) and reload once. Install Lunelio in Applications before loading the connector so its folder stays in place.
+**Chrome:** in Lunelio Settings, click **Add Chrome connector**. In `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, and select the revealed folder. Open the [Spotify web player](https://open.spotify.com), reload once, and start a song in Spotify before using the widget’s controls. Install Lunelio in Applications before loading the connector so its folder stays in place.
+
+After updating the connector, reload your Spotify tabs again. If a freshly reopened tab does not start from the widget, click Play in Spotify once.
 
 Use the widget’s **••• → Settings…** menu to choose a source, hide the menu-bar icon, or start the connection at login. Spotify’s playback rules still apply.

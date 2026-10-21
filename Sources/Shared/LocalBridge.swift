@@ -20,11 +20,12 @@ enum LocalBridge {
         configuration.activates = false
         _ = try await NSWorkspace.shared.openApplication(at: app, configuration: configuration)
     }
-    static var token: String {
+    // The bundled token is fixed for this process's lifetime.
+    static let token: String = {
         guard let url = Bundle.main.url(forResource: "bridge-token", withExtension: "txt"),
               let text = try? String(contentsOf: url, encoding: .utf8) else { return "" }
         return text.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
+    }()
 
     static func request(_ command: PlayerCommand? = nil) async throws -> Playback {
         guard !token.isEmpty else { throw URLError(.userAuthenticationRequired) }

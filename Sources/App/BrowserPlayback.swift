@@ -7,6 +7,7 @@ final class BrowserPlayback {
     var hasPlayer: Bool { active != nil }
     private var pending: (session: String, command: BrowserCommand, sent: Bool)?
     private var completion: CheckedContinuation<Void, any Error>?
+    private var polls: [String: (id: UUID, completion: CheckedContinuation<Data, Never>)] = [:]
     var onPlayback: ((Playback) -> Void)?
     var onOpen: (() -> Void)?
     var onError: ((String) -> Void)?
@@ -24,10 +25,7 @@ final class BrowserPlayback {
             snapshots["\(message.session):\(snapshot.tab)"] = snapshot
             selectPlayback()
         } else if message.kind == "poll" {
-            if var pending, pending.session == message.session, !pending.sent {
-                pending.sent = true; self.pending = pending
-                return (try? JSONEncoder().encode(pending.command)) ?? Data("{}".utf8)
-            }
+            return takeCommand(session: message.session) ?? Data("{}".utf8)
         } else if message.kind == "ack", message.commandID == pending?.command.id {
             if let pending, pending.session == message.session {
                 self.pending = nil
@@ -46,13 +44,49 @@ final class BrowserPlayback {
             selectPlayback()
         } else if message.kind == "disconnect" {
             snapshots = snapshots.filter { !$0.key.hasPrefix(message.session + ":") }
+            finishPoll(session: message.session)
             selectPlayback()
         } else if message.kind == "open" { onOpen?() }
         return Data("{}".utf8)
     }
 
-    func expire() {
-        snapshots = snapshots.filter { Date().timeIntervalSince1970 - $0.value.playback.updated < 90 }
+    func waitForCommand(session: String, timeout: Duration = .seconds(10)) async -> Data {
+        guard !session.isEmpty, session.count < 100, !Task.isCancelled else { return Data("{}".utf8) }
+        if let data = takeCommand(session: session) { return data }
+        let id = UUID()
+        let timer = Task { [weak self] in
+            do { try await Task.sleep(for: timeout) } catch { return }
+            self?.finishPoll(session: session, id: id)
+        }
+        defer { timer.cancel() }
+        return await withTaskCancellationHandler {
+            await withCheckedContinuation { continuation in
+                finishPoll(session: session)
+                polls[session] = (id, continuation)
+                if Task.isCancelled { finishPoll(session: session, id: id) }
+            }
+        } onCancel: {
+            Task { @MainActor [weak self] in self?.finishPoll(session: session, id: id) }
+        }
+    }
+
+    private func takeCommand(session: String) -> Data? {
+        guard var pending, pending.session == session, !pending.sent else { return nil }
+        pending.sent = true
+        self.pending = pending
+        return try? JSONEncoder().encode(pending.command)
+    }
+
+    private func finishPoll(session: String, id: UUID? = nil, data: Data = Data("{}".utf8)) {
+        guard let poll = polls[session], id == nil || poll.id == id else { return }
+        polls.removeValue(forKey: session)
+        poll.completion.resume(returning: data)
+    }
+
+    func expire(now: Date = .now) {
+        let cutoff = now.timeIntervalSince1970 - 90
+        guard snapshots.values.contains(where: { $0.playback.updated <= cutoff }) else { return }
+        snapshots = snapshots.filter { $0.value.playback.updated > cutoff }
         selectPlayback()
     }
 
@@ -74,7 +108,8 @@ final class BrowserPlayback {
             throw NSError(domain: "SpotifyMini", code: 2, userInfo: [NSLocalizedDescriptionKey: "Open Spotify and connect the Chrome extension first."])
         }
         let id = UUID().uuidString
-        pending = (String(active[..<separator]), BrowserCommand(id: id, action: action.rawValue, tab: snapshot.tab), false)
+        let session = String(active[..<separator])
+        pending = (session, BrowserCommand(id: id, action: action.rawValue, tab: snapshot.tab), false)
         let timeout = Task { [weak self] in
             do { try await Task.sleep(for: .seconds(8)) } catch { return }
             guard let self, self.pending?.command.id == id else { return }
@@ -83,6 +118,11 @@ final class BrowserPlayback {
             continuation?.resume(throwing: URLError(.timedOut))
         }
         defer { timeout.cancel() }
-        try await withCheckedThrowingContinuation { completion = $0 }
+        try await withCheckedThrowingContinuation {
+            completion = $0
+            if polls[session] != nil, let data = takeCommand(session: session) {
+                finishPoll(session: session, data: data)
+            }
+        }
     }
 }

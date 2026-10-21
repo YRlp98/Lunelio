@@ -5,8 +5,9 @@ import Network
 final class BridgeServer {
     private var listener: NWListener?
     private var connections: [UUID: NWConnection] = [:]
+    private var timeouts: [UUID: Task<Void, Never>] = [:]
     var handler: ((PlayerCommand?) async -> Playback)?
-    var browserHandler: ((BrowserMessage) -> Data)?
+    var browserHandler: ((BrowserMessage) async -> Data)?
     var onError: ((String) -> Void)?
 
     func start() {
@@ -33,13 +34,16 @@ final class BridgeServer {
         connections[id] = connection
         connection.start(queue: .main)
         receive(connection, id: id, accumulated: Data())
-        Task { [weak self] in
-            try? await Task.sleep(for: .seconds(15))
+        timeouts[id] = Task { [weak self] in
+            do { try await Task.sleep(for: .seconds(15)) } catch { return }
             self?.finish(id)
         }
     }
 
-    private func finish(_ id: UUID) { connections.removeValue(forKey: id)?.cancel() }
+    private func finish(_ id: UUID) {
+        timeouts.removeValue(forKey: id)?.cancel()
+        connections.removeValue(forKey: id)?.cancel()
+    }
 
     private func receive(_ connection: NWConnection, id: UUID, accumulated: Data) {
         connection.receive(minimumIncompleteLength: 1, maximumLength: 16_384) { [weak self] data, _, complete, error in
@@ -63,7 +67,7 @@ final class BridgeServer {
             let command = PlayerCommand(rawValue: String(request.path.dropFirst("/command/".count)))
             if request.method == "POST", request.path == "/browser",
                let message = try? JSONDecoder().decode(BrowserMessage.self, from: request.body), let browserHandler {
-                body = browserHandler(message); status = "200 OK"
+                body = await browserHandler(message); status = "200 OK"
             } else if request.body.isEmpty && ((request.method == "GET" && request.path == "/state") ||
                 (request.method == "POST" && request.path.hasPrefix("/command/") && command != nil)) {
                 if let handler {

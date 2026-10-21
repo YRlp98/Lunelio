@@ -1,12 +1,12 @@
 # Preparing Lunelio for public release
 
-Run **./package.command** to create **build/Downloads/Lunelio-0.1.2-beta.dmg** and its SHA-256 checksum. The disk image includes the complete app, embedded widget, native helper, Chrome connector, an Applications shortcut, user instructions, and the MIT license. The app also includes the license in its resources. All three executables contain Apple silicon and Intel binaries.
+Run **./package.command** to create **build/Downloads/Lunelio-0.2.2-beta.dmg** and its SHA-256 checksum. The disk image includes the complete app, embedded widget, native helper, Chrome connector, an Applications shortcut, user instructions, and the MIT license. The app also includes the license in its resources. All three executables contain Apple silicon and Intel binaries.
 
 The packager uses a separate app copy, replaces the development connection token with a fresh package token, and signs the helper, widget, and app locally. It checks matching versions, architectures, signatures, and the disk image. It does not change the running development app or its compatibility links.
 
 ## Beta downloads
 
-Publish each beta through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The current release tag is **v0.1.2-beta**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that this beta is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
+Publish each beta through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The latest published release is **v0.1.2-beta**; the next release tag is **v0.2.2-beta**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that this beta is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
 
 Record each release in [CHANGELOG.md](../CHANGELOG.md). Replace its Unreleased label with the publication date and copy that version’s changes into the GitHub release notes. Keep beta releases marked as pre-releases.
 
@@ -37,6 +37,6 @@ Apple documentation: [Developer ID](https://developer.apple.com/developer-id/), 
 
 ## User experience after release
 
-Users will move the app to Applications and open it. For Spotify Desktop, they click Connect Spotify Desktop and allow macOS Automation permission. For browser playback, they click Add Chrome Connector to install from the store. After that one-time setup, opening Spotify connects automatically. Widget controls also restart the quiet companion when it has stopped; Chrome’s JavaScript-from-Apple-Events setting is unnecessary.
+Users move the app to Applications and open it. For Spotify Desktop, they click Connect Spotify Desktop and allow macOS Automation permission. For browser playback, they click Add Chrome Connector, load the revealed folder using Chrome’s Load unpacked option, reload Spotify, and start a song in Spotify. The helper reconnects automatically after the last Spotify tab is closed and later reopened. A freshly reopened web tab may need one Play click in Spotify before widget playback starts. After connector updates, users reload their Spotify tabs again. Widget controls also restart the quiet companion when it has stopped; Chrome’s JavaScript-from-Apple-Events setting is unnecessary.
 
 Widget refresh timing is controlled by macOS. Test song changes and playback buttons separately; desktop and Notification Center widgets both use the system’s scheduled refresh behavior. Playback commands use the quiet background companion.

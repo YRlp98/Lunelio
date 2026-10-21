@@ -2,6 +2,158 @@ import Foundation
 import JavaScriptCore
 import Testing
 
+@Test("Chrome helper stops when unused and reconnects without interrupting another player", arguments: [
+    "last-tab", "navigate", "redacted-url", "multiple-tabs", "paused-player", "reopen",
+    "settings", "multiple-settings", "settings-with-player", "snapshot-during-check",
+    "stale-query", "query-failure", "settings-during-check", "old-command"
+])
+@MainActor
+func browserWorkerLifecycle(scenario: String) async throws {
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let source = try String(contentsOf: root.appendingPathComponent("BrowserExtension/worker.js"), encoding: .utf8)
+    let context = try #require(JSContext())
+    context.evaluateScript("""
+        function check(value, message) { if (!value) throw new Error(message); }
+        function event() {
+          return { addListener(callback) { this.listener = callback; },
+            emit(...args) { return this.listener?.(...args); } };
+        }
+        let tabs = [{id:7, url:'https://open.spotify.com/'}];
+        let deferQuery = false, queryFails = false, releaseQuery;
+        let getTab = async id => tabs.find(tab => tab.id === id);
+        const ports = [];
+        const chrome = {
+          runtime: {
+            onMessage:event(),
+            connectNative(name) {
+              check(name === 'local.spotifymini.bridge', 'Wrong native host');
+              const port = {onDisconnect:event(), onMessage:event(), messages:[], disconnected:false,
+                postMessage(message) {
+                  check(!this.disconnected, 'Posted to a closed connection'); this.messages.push(message);
+                  if (message.kind === 'disconnect') this.disconnected = true;
+                },
+                disconnect() { throw new Error('Disconnected before the helper could clear playback'); }
+              };
+              ports.push(port); return port;
+            }
+          },
+          tabs: {
+            onRemoved:event(), onUpdated:event(),
+            query(filter) {
+              check(filter.url === 'https://open.spotify.com/*', 'Query exceeded Spotify host access');
+              if (queryFails) return Promise.reject(new Error('Query unavailable'));
+              if (deferQuery) return new Promise(resolve => { releaseQuery = resolve; });
+              return Promise.resolve(tabs.slice());
+            },
+            get:id => getTab(id), update:async () => {},
+            sendMessage:async () => ({playback:{title:'Song'}})
+          },
+          windows:{get:async () => ({state:'normal'}), update:async () => {}}
+        };
+        function snapshot(id = 7) {
+          chrome.runtime.onMessage.emit({kind:'snapshot', playback:{playing:false}},
+            {tab:{id}, url:'https://open.spotify.com/'}, () => {});
+        }
+        function openSettings() { chrome.runtime.onMessage.emit({kind:'open'}, {}, () => {}); }
+        let finished = false, failure = '';
+        """)
+    context.evaluateScript(source)
+    #expect(context.exception == nil, "\(context.exception?.toString() ?? "")")
+    let scenarioJSON = String(decoding: try JSONEncoder().encode(scenario), as: UTF8.self)
+    context.evaluateScript("""
+        (async () => {
+          check(ports.length === 0, 'Started helper before Spotify or Settings needed it');
+          const scenario = \(scenarioJSON);
+          if (scenario === 'settings' || scenario === 'multiple-settings') {
+            tabs = [];
+            openSettings();
+            const connection = ports[0];
+            if (scenario === 'multiple-settings') openSettings();
+            await chrome.tabs.onRemoved.emit(99);
+            check(!connection.disconnected, 'Closed before Settings handoff finished');
+            await connection.onMessage.emit({kind:'opened'});
+            if (scenario === 'multiple-settings') {
+              check(!connection.disconnected, 'Closed with another Settings request pending');
+              await connection.onMessage.emit({kind:'opened'});
+            }
+            check(connection.disconnected, 'Settings left an idle helper');
+            return;
+          }
+          snapshot();
+          const first = ports[0];
+          if (scenario === 'multiple-tabs' || scenario === 'paused-player') {
+            if (scenario === 'multiple-tabs') {
+              tabs.push({id:9, url:'https://open.spotify.com/'}); snapshot(9); tabs.shift();
+            }
+            await chrome.tabs.onRemoved.emit(scenario === 'multiple-tabs' ? 7 : 99);
+            check(!first.disconnected && ports.length === 1, 'Disconnected an available player');
+            const id = tabs[0].id;
+            await first.onMessage.emit({kind:'command', tab:id, id:'next-command', action:'next'});
+            check(first.messages.some(message => message.kind === 'ack' && message.commandID === 'next-command'),
+              'Remaining player lost its controls');
+            return;
+          }
+          if (scenario === 'settings-with-player') {
+            openSettings(); await first.onMessage.emit({kind:'opened'});
+            check(!first.disconnected, 'Opening Settings disconnected Spotify'); return;
+          }
+          if (scenario === 'query-failure') {
+            tabs = []; queryFails = true;
+            await chrome.tabs.onRemoved.emit(7);
+            check(!first.disconnected, 'Query failure was treated as no players');
+            queryFails = false; await chrome.tabs.onRemoved.emit(7);
+            check(first.disconnected, 'Did not recover after query failure'); return;
+          }
+          if (['snapshot-during-check', 'stale-query', 'settings-during-check'].includes(scenario)) {
+            tabs = []; deferQuery = true;
+            const closing = chrome.tabs.onRemoved.emit(7);
+            if (scenario === 'settings-during-check') openSettings();
+            else {
+              if (scenario === 'stale-query') { first.disconnected = true; first.onDisconnect.emit(); }
+              tabs = [{id:9, url:'https://open.spotify.com/'}]; snapshot(9);
+            }
+            releaseQuery([]); await closing; deferQuery = false;
+            if (scenario === 'settings-during-check') {
+              check(!first.disconnected, 'Idle check interrupted Settings');
+              await first.onMessage.emit({kind:'opened'});
+              check(first.disconnected, 'Settings acknowledgement left an idle helper');
+            } else {
+              check(!ports[ports.length-1].disconnected, 'Stale query stopped a new connection or player');
+            }
+            return;
+          }
+          let pendingCommand, releaseGet;
+          if (scenario === 'old-command') {
+            getTab = () => new Promise(resolve => { releaseGet = resolve; });
+            pendingCommand = first.onMessage.emit({kind:'command', tab:7, id:'old-command', action:'next'});
+          }
+          tabs = [];
+          if (scenario === 'navigate') await chrome.tabs.onUpdated.emit(7, {url:'https://example.com/'});
+          else if (scenario === 'redacted-url') await chrome.tabs.onUpdated.emit(7, {status:'complete'});
+          else await chrome.tabs.onRemoved.emit(7);
+          check(first.disconnected, 'Last Spotify tab left the helper running');
+          if (scenario === 'reopen' || scenario === 'old-command') {
+            tabs = [{id:9, url:'https://open.spotify.com/'}]; snapshot(9);
+            check(ports.length === 2 && !ports[1].disconnected, 'Spotify did not reconnect');
+            first.onDisconnect.emit(); snapshot(9);
+            check(ports.length === 2, 'Old disconnect cleared a new connection');
+            if (pendingCommand) {
+              releaseGet({id:7, url:'https://open.spotify.com/'}); await pendingCommand;
+              check(!ports[1].messages.some(message => message.commandID === 'old-command'),
+                'Old command reply leaked to a new connection');
+            }
+          }
+        })().catch(error => { failure = String(error); }).finally(() => { finished = true; });
+        """)
+    for _ in 0..<100 {
+        if context.evaluateScript("finished")?.toBool() == true { break }
+        try await Task.sleep(for: .milliseconds(5))
+    }
+    #expect(context.exception == nil, "\(context.exception?.toString() ?? "")")
+    #expect(context.evaluateScript("finished")?.toBool() == true, "Lifecycle scenario did not finish: \(scenario)")
+    #expect(context.evaluateScript("failure")?.toString() == "", "\(context.evaluateScript("failure")?.toString() ?? scenario)")
+}
+
 @Test("Profile selection, delivery, acknowledgements, and disconnect")
 @MainActor
 func browserPlaybackTests() async throws {
@@ -64,6 +216,92 @@ func browserPlaybackTests() async throws {
     _ = browser.receive(BrowserMessage(kind: "closed", session: "profile-a", tab: 7))
     #expect(!browser.hasPlayer && current.title.isEmpty)
 
+}
+
+@Test("Waiting browser polls deliver each command once to its own profile", arguments: [false, true])
+@MainActor
+func browserCommandWaiterTests(commandQueuedFirst: Bool) async throws {
+    let browser = BrowserPlayback()
+    _ = browser.receive(BrowserMessage(kind: "snapshot", session: "player",
+        snapshot: BrowserSnapshot(tab: 7, playback: Playback(title: "Song", canControl: true))))
+    let poll: Task<Data, Never>?
+    if commandQueuedFirst { poll = nil }
+    else {
+        poll = Task { await browser.waitForCommand(session: "player", timeout: .seconds(2)) }
+        try await Task.sleep(for: .milliseconds(30))
+    }
+    let operation = Task { try await browser.send(.next) }
+    try await Task.sleep(for: .milliseconds(30))
+    let wrongProfile = await browser.waitForCommand(session: "other", timeout: .milliseconds(30))
+    #expect(wrongProfile == Data("{}".utf8))
+    let data: Data
+    if let poll { data = await poll.value }
+    else { data = await browser.waitForCommand(session: "player", timeout: .seconds(2)) }
+    let command = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
+    let id = try #require(command["id"] as? String)
+    #expect(command["action"] as? String == "next" && command["tab"] as? Int == 7)
+    let duplicate = await browser.waitForCommand(session: "player", timeout: .milliseconds(30))
+    #expect(duplicate == Data("{}".utf8))
+    _ = browser.receive(BrowserMessage(kind: "ack", session: "player", commandID: id))
+    try await operation.value
+}
+
+@Test("Browser polls finish on timeout, disconnect, and cancellation", arguments: ["timeout", "disconnect", "cancel", "replaced"])
+@MainActor
+func browserWaiterLifecycleTests(scenario: String) async throws {
+    let browser = BrowserPlayback()
+    var completed = false
+    let poll = Task {
+        let data = await browser.waitForCommand(session: "player", timeout: .milliseconds(100))
+        completed = true
+        return data
+    }
+    try await Task.sleep(for: .milliseconds(30))
+    #expect(!completed)
+    if scenario == "disconnect" { _ = browser.receive(BrowserMessage(kind: "disconnect", session: "player")) }
+    if scenario == "cancel" { poll.cancel() }
+    if scenario == "replaced" {
+        var replacementCompleted = false
+        let replacement = Task {
+            let data = await browser.waitForCommand(session: "player", timeout: .seconds(2))
+            replacementCompleted = true
+            return data
+        }
+        #expect(await poll.value == Data("{}".utf8))
+        poll.cancel()
+        try await Task.sleep(for: .milliseconds(150))
+        #expect(!replacementCompleted, "An old timeout or cancellation finished the replacement poll")
+        _ = browser.receive(BrowserMessage(kind: "disconnect", session: "player"))
+        #expect(await replacement.value == Data("{}".utf8))
+    }
+    #expect(await poll.value == Data("{}".utf8))
+    #expect(completed)
+    #expect(await browser.waitForCommand(session: "", timeout: .seconds(2)) == Data("{}".utf8))
+    #expect(await browser.waitForCommand(session: String(repeating: "a", count: 100), timeout: .seconds(2)) == Data("{}".utf8))
+    let cancelled = Task {
+        withUnsafeCurrentTask { $0?.cancel() }
+        return await browser.waitForCommand(session: "cancelled", timeout: .seconds(2))
+    }
+    #expect(await cancelled.value == Data("{}".utf8))
+}
+
+@Test("Fresh browser playback stays quiet; expired playback is cleared once")
+@MainActor
+func browserExpiryTests() {
+    let browser = BrowserPlayback()
+    var updates = 0
+    browser.onPlayback = { _ in updates += 1 }
+    browser.expire()
+    #expect(updates == 0)
+    let snapshot = BrowserSnapshot(tab: 7, playback: Playback(title: "Song", canControl: true))
+    _ = browser.receive(BrowserMessage(kind: "snapshot", session: "expiry", snapshot: snapshot))
+    #expect(updates == 1 && browser.hasPlayer)
+    browser.expire()
+    #expect(updates == 1 && browser.hasPlayer)
+    browser.expire(now: Date().addingTimeInterval(91))
+    #expect(updates == 2 && !browser.hasPlayer)
+    browser.expire(now: Date().addingTimeInterval(92))
+    #expect(updates == 2)
 }
 
 @Test("Browser seek commands reach both endpoints and reject invalid percentages", arguments: zip(

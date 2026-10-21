@@ -1,18 +1,30 @@
 import AppKit
+import Combine
 import SwiftUI
 import WidgetKit
 
 @MainActor
 final class PlayerModel: ObservableObject {
-    @Published var playback = Playback(message: "Open Spotify Desktop or connect Spotify in Chrome.")
+    var playback = Playback(message: "Open Spotify Desktop or connect Spotify in Chrome.") {
+        willSet {
+            // Settings needs metadata changes; the widget reads the latest timing through the bridge.
+            var metadata = newValue
+            metadata.position = playback.position
+            metadata.updated = playback.updated
+            if metadata != playback { objectWillChange.send() }
+        }
+    }
     @Published var busy = false
     @Published var serverMessage = ""
-    @Published var desktopMessage = "Click Connect Spotify Desktop to allow the connection."
+    var desktopMessage = "Click Connect Spotify Desktop to allow the connection." {
+        willSet { if newValue != desktopMessage { objectWillChange.send() } }
+    }
     @Published var connectingDesktop = false
     @Published var source = PlaybackSource(rawValue: UserDefaults.standard.string(forKey: "playbackSource") ?? "") ?? .automatic {
         didSet {
             UserDefaults.standard.set(source.rawValue, forKey: "playbackSource")
             selectPlayback()
+            updatePolling()
             Task { await pollDesktop() }
         }
     }
@@ -21,6 +33,7 @@ final class PlayerModel: ObservableObject {
     private var desktopPlayback: Playback?
     private var browserPlayback: Playback?
     private var polling: Task<Void, Never>?
+    private var workspaceChanges: AnyCancellable?
     private var readingDesktop = false
     var activeSource: PlaybackSource? { PlaybackSource.select(preference: source, desktop: desktopPlayback, browser: browserPlayback) }
 
@@ -29,14 +42,43 @@ final class PlayerModel: ObservableObject {
             guard let self else { return }
             self.browserPlayback = self.browser.hasPlayer ? value : nil
             self.selectPlayback()
+            self.updatePolling()
         }
         do { try BrowserConnector.installHost() }
         catch { serverMessage = "Could not install the Chrome connector: " + error.localizedDescription }
+        let center = NSWorkspace.shared.notificationCenter
+        workspaceChanges = center.publisher(for: NSWorkspace.didLaunchApplicationNotification)
+            .merge(with: center.publisher(for: NSWorkspace.didTerminateApplicationNotification))
+            .receive(on: RunLoop.main)
+            .sink { [weak self] notification in
+                guard let application = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication,
+                      application.bundleIdentifier == SpotifyDesktop.bundleID else { return }
+                Task { @MainActor in
+                    guard let self else { return }
+                    await self.pollDesktop()
+                    self.updatePolling()
+                }
+            }
+        updatePolling()
+        Task { await pollDesktop() }
+    }
+
+    private func updatePolling() {
+        // Launch notifications and browser snapshots wake an otherwise idle companion.
+        guard browser.hasPlayer || (source != .browser && SpotifyDesktop.isRunning) else {
+            polling?.cancel()
+            polling = nil
+            return
+        }
+        guard polling == nil else { return }
         polling = Task { [weak self] in
             while !Task.isCancelled {
                 guard let self else { return }
                 self.browser.expire()
-                await self.pollDesktop()
+                if self.source != .browser && (self.desktopPlayback != nil || SpotifyDesktop.isRunning) {
+                    await self.pollDesktop()
+                }
+                self.updatePolling()
                 do { try await Task.sleep(for: .seconds(2)) } catch { return }
             }
         }
@@ -138,9 +180,11 @@ final class PlayerModel: ObservableObject {
 
     private func update(_ value: Playback) {
         let previous = playback
-        playback = value
         // Keep the widget menu open when the player publishes new metadata.
-        playback.optionsVisible = previous.optionsVisible
+        var value = value
+        value.optionsVisible = previous.optionsVisible
+        guard value != previous else { return }
+        playback = value
         let seeked = abs(previous.elapsed(at: Date(timeIntervalSince1970: playback.updated)) - playback.position)
             > (playback.playing ? 3 : 0.5)
         if previous.title != playback.title || previous.artist != playback.artist || previous.artwork != playback.artwork ||

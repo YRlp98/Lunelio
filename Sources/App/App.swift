@@ -84,7 +84,7 @@ struct SetupView: View {
 }
 
 @MainActor
-final class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     let model = PlayerModel()
     private let server = BridgeServer()
     private var setupWindow: NSWindow?
@@ -107,7 +107,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         server.onError = { [weak self] message in self?.model.serverMessage = message }
         server.start()
-        server.browserHandler = { [weak self] message in self?.model.browser.receive(message) ?? Data("{}".utf8) }
+        server.browserHandler = { [weak self] message in
+            guard let self else { return Data("{}".utf8) }
+            if message.kind == "poll" { return await self.model.browser.waitForCommand(session: message.session) }
+            return self.model.browser.receive(message)
+        }
         model.browser.onOpen = { [weak self] in self?.showSetup() }
         model.start()
         WidgetCenter.shared.reloadTimelines(ofKind: "SpotifyMiniWidget")
@@ -168,11 +172,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             window.contentView = NSHostingView(rootView: SetupView(model: model,
                 onHideMenuBarIconChange: { [weak self] hidden in self?.status?.isVisible = !hidden }))
             window.isReleasedWhenClosed = false
+            window.delegate = self
             window.center()
             setupWindow = window
         }
         NSApp.activate(ignoringOtherApps: true)
         setupWindow?.makeKeyAndOrderFront(nil)
+    }
+
+    func windowWillClose(_ notification: Notification) {
+        guard let window = notification.object as? NSWindow, window === setupWindow else { return }
+        window.contentView = nil
+        setupWindow = nil
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

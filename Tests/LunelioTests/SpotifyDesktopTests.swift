@@ -1,5 +1,72 @@
 import Foundation
+import Combine
 import Testing
+
+@Test("Timing updates stay current without redrawing Settings; metadata changes still publish")
+@MainActor
+func playbackPublicationTests() {
+    let model = PlayerModel()
+    model.playback = Playback(title: "Song", artist: "Artist", playing: true, duration: 240, canControl: true)
+    var updates = 0
+    let observation = model.objectWillChange.sink { updates += 1 }
+    defer { observation.cancel() }
+    for position in 1...100 {
+        var playback = model.playback
+        playback.position = Double(position)
+        playback.updated += 2
+        model.playback = playback
+    }
+    #expect(updates == 0 && model.playback.position == 100)
+    model.playback.artist = "Artist, Collaborator"
+    model.playback.playing = false
+    model.playback.title = "Next song"
+    model.playback.canControl = false
+    model.playback.optionsVisible = true
+    #expect(updates == 5)
+    model.desktopMessage = "Connected"
+    model.desktopMessage = "Connected"
+    #expect(updates == 6)
+}
+
+@Test("An idle companion stays quiet and reconnects browser playback with its menu intact")
+@MainActor
+func idleCompanionTests() async throws {
+    // This unhosted test bundle has no native-host resources and cannot install a connector.
+    try #require(Bundle.main.url(forResource: "extension-id", withExtension: "txt") == nil)
+    let defaults = UserDefaults.standard
+    let preference = defaults.string(forKey: "playbackSource")
+    defer {
+        if let preference { defaults.set(preference, forKey: "playbackSource") }
+        else { defaults.removeObject(forKey: "playbackSource") }
+    }
+    let model = PlayerModel()
+    model.source = .browser
+    model.start()
+    try await Task.sleep(for: .milliseconds(30))
+    var updates = 0
+    let observation = model.objectWillChange.sink { updates += 1 }
+    defer { observation.cancel() }
+    try await Task.sleep(for: .milliseconds(2200))
+    #expect(updates == 0)
+
+    func reconnect() {
+        _ = model.browser.receive(BrowserMessage(kind: "snapshot", session: "idle-test",
+            snapshot: BrowserSnapshot(tab: 7, playback: Playback(title: "Reconnected song", canControl: true))))
+    }
+    reconnect()
+    #expect(model.playback.title == "Reconnected song")
+    await model.refresh(.menu)
+    #expect(model.playback.optionsVisible == true)
+    try await Task.sleep(for: .milliseconds(30))
+    updates = 0
+    try await Task.sleep(for: .milliseconds(2200))
+    #expect(updates == 0 && model.playback.optionsVisible == true)
+    _ = model.browser.receive(BrowserMessage(kind: "disconnect", session: "idle-test"))
+    #expect(!model.playback.canControl && model.playback.title.isEmpty)
+    reconnect()
+    #expect(model.playback.title == "Reconnected song" && model.playback.optionsVisible == true)
+    _ = model.browser.receive(BrowserMessage(kind: "disconnect", session: "idle-test"))
+}
 
 @Test("Desktop metadata, duration units, safe links, and seek commands")
 func spotifyDesktopTests() throws {

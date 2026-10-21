@@ -305,6 +305,7 @@
 				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
 				"SKIP_INSTALL" = "YES";
 				"PRODUCT_MODULE_NAME" = "SpotifyMiniWidget";
+				"EXECUTABLE_NAME" = "LunelioWidget";
 				"ENABLE_TESTABILITY" = "YES";
 				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
 				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
@@ -338,7 +339,7 @@
 				"SKIP_INSTALL" = "YES";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini.bridge";
 				"ENABLE_TESTABILITY" = "YES";
-				"PRODUCT_NAME" = "SpotifyMiniBridge";
+				"PRODUCT_NAME" = "LunelioBridge";
 			};
 			"name" = "Debug";
 		};
@@ -623,7 +624,7 @@
 			"isa" = "XCBuildConfiguration";
 			"buildSettings" = {
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited)";
-				"EXECUTABLE_NAME" = "SpotifyMini";
+				"EXECUTABLE_NAME" = "Lunelio";
 				"CODE_SIGN_ENTITLEMENTS" = "Config/App.entitlements";
 				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
 				"PRODUCT_MODULE_NAME" = "SpotifyMini";
@@ -777,7 +778,7 @@
 				"INFOPLIST_FILE" = "Config/App-Info.plist";
 				"PRODUCT_MODULE_NAME" = "SpotifyMini";
 				"ENABLE_TESTABILITY" = "YES";
-				"EXECUTABLE_NAME" = "SpotifyMini";
+				"EXECUTABLE_NAME" = "Lunelio";
 				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
 				"CODE_SIGN_ENTITLEMENTS" = "Config/App.entitlements";
 				"ASSETCATALOG_COMPILER_APPICON_NAME" = "LunelioIcon";
@@ -823,7 +824,7 @@
 			"productType" = "com.apple.product-type.tool";
 			"productReference" = "602E88C3E958B19F15B7B818";
 			"buildConfigurationList" = "6C687E9079BE25B69BAA7A9F";
-			"productName" = "SpotifyMiniBridge";
+			"productName" = "LunelioBridge";
 			"isa" = "PBXNativeTarget";
 			"buildPhases" = (
 				"7FD01B10DF6BCFBA0BF2B2BA",
@@ -885,6 +886,7 @@
 				"INFOPLIST_FILE" = "Config/Widget-Info.plist";
 				"SKIP_INSTALL" = "YES";
 				"PRODUCT_MODULE_NAME" = "SpotifyMiniWidget";
+				"EXECUTABLE_NAME" = "LunelioWidget";
 				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
 				"CODE_SIGN_ENTITLEMENTS" = "Config/Widget.entitlements";
 				"ASSETCATALOG_COMPILER_APPICON_NAME" = "LunelioIcon";
@@ -894,7 +896,7 @@
 			"name" = "Release";
 		};
 		"602E88C3E958B19F15B7B818" = {
-			"path" = "SpotifyMiniBridge";
+			"path" = "LunelioBridge";
 			"isa" = "PBXFileReference";
 			"explicitFileType" = "compiled.mach-o.executable";
 			"sourceTree" = "BUILT_PRODUCTS_DIR";
@@ -1194,7 +1196,7 @@
 				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
 				"SKIP_INSTALL" = "YES";
 				"PRODUCT_BUNDLE_IDENTIFIER" = "local.yousef.SpotifyMini.bridge";
-				"PRODUCT_NAME" = "SpotifyMiniBridge";
+				"PRODUCT_NAME" = "LunelioBridge";
 			};
 			"name" = "Release";
 		};

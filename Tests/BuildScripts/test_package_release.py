@@ -43,6 +43,22 @@ class PackageReleaseTests(unittest.TestCase):
         self.assertFalse((self.root / 'ChromeExtension').exists())
         self.assertFalse((self.root / 'Lunelio.app').exists())
 
+    def test_packaging_removes_only_staged_obsolete_executables(self):
+        binaries = [('Contents/MacOS/SpotifyMini', 'Contents/MacOS/Lunelio'),
+                    ('Contents/MacOS/SpotifyMiniBridge', 'Contents/MacOS/LunelioBridge'),
+                    ('Contents/PlugIns/SpotifyMiniWidget.appex/Contents/MacOS/SpotifyMiniWidget',
+                     'Contents/PlugIns/SpotifyMiniWidget.appex/Contents/MacOS/LunelioWidget')]
+        for old, current in binaries:
+            for name in (old, current):
+                binary = self.source / name
+                binary.parent.mkdir(parents=True, exist_ok=True)
+                binary.write_bytes(name.encode())
+        module.stage_app(self.source, self.target)
+        for old, current in binaries:
+            self.assertTrue((self.source / old).exists())
+            self.assertFalse((self.target / old).exists())
+            self.assertEqual((self.target / current).read_bytes(), current.encode())
+
     def test_mismatched_versions_and_external_links_are_rejected(self):
         bad_info = dict(self.info, CFBundleVersion='25')
         (self.widget / 'Contents/Info.plist').write_bytes(plistlib.dumps(bad_info))
