@@ -66,6 +66,12 @@ class PrepareResourcesTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(sentinel.read_text(), 'existing files')
 
+    def test_stable_version_has_no_prerelease_suffix(self):
+        self.version('1.0.0', '1.0.0')
+        module.prepare(self.root)
+        manifest = json.loads((self.root / 'build/ChromeExtension/manifest.json').read_text())
+        self.assertEqual((manifest['version'], manifest['version_name']), ('1.0.0', '1.0.0'))
+
     def test_token_is_not_a_cleanable_resource_phase_output(self):
         path = Path(__file__).resolve().parents[2] / 'Lunelio.xcodeproj/project.pbxproj'
         project = json.loads(subprocess.check_output(['plutil', '-convert', 'json', '-o', '-', str(path)]))

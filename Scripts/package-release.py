@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Package a universal, locally signed beta without changing the development app."""
+"""Package a universal, locally signed release without changing the development app."""
 import hashlib
 import json
 import plistlib
@@ -20,7 +20,7 @@ def stage_app(source: Path, destination: Path) -> dict:
     connector = json.loads((source / 'Contents/Resources/ChromeExtension/manifest.json').read_text())
     if (connector['version'], connector['version_name']) != (info['CFBundleShortVersionString'], info['CFBundleGetInfoString']):
         raise ValueError('Chrome connector version must match the app')
-    # A downloadable beta must not share the developer's private connection token.
+    # A downloadable release must not share the developer's private connection token.
     tokens = [Path('Contents/Resources/bridge-token.txt'), widget / 'Contents/Resources/bridge-token.txt']
     if any(not (source / path).read_text().strip() for path in tokens):
         raise ValueError('The app and widget need connection resources')
@@ -93,9 +93,10 @@ USE
 Use the widget buttons to play, pause, or skip; click the progress bar to seek.
 The three dots show Settings and Open Spotify inside the widget.
 Automatic selects the playing source, with Desktop taking priority in a tie.
+The widget theme follows the system's light or dark appearance automatically.
 
-BETA INSTALLATION
-This beta is locally signed, not Developer ID signed or notarized by Apple.
+MACOS INSTALLATION
+This app is locally signed, not Developer ID signed or notarized by Apple.
 If macOS cannot verify the developer, only proceed if you trust its source.
 After trying to open it, use System Settings > Privacy & Security > Open Anyway.
 Never override an alert saying the app will damage your computer.
@@ -110,7 +111,7 @@ iOS and iPadOS are not supported yet. macOS may delay widget updates.
         subprocess.run(['hdiutil', 'verify', str(image)], check=True)
         checksum = hashlib.sha256(image.read_bytes()).hexdigest()
         (output / f'{image.name}.sha256').write_text(f'{checksum}  {image.name}\n')
-        print(f'Beta installer: {image}\nLocally signed; public notarization and testing on a clean Mac are still pending.')
+        print(f'Installer: {image}\nLocally signed; public notarization and testing on a clean Mac are still pending.')
         return image
 
 

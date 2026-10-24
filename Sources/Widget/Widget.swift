@@ -41,30 +41,39 @@ struct MusicProvider: @preconcurrency TimelineProvider {
 
 struct MusicWidgetView: View {
     let entry: MusicEntry
+    @Environment(\.colorScheme) private var colorScheme
     #if WIDGET_PREVIEW
     let family: WidgetFamily
     #else
     @Environment(\.widgetFamily) var family
     #endif
     private let green = Color(red: 30 / 255, green: 215 / 255, blue: 96 / 255)
+    private var dark: Bool { colorScheme == .dark }
+    private var foreground: Color { dark ? .white : Color(white: 0.10) }
+    private var accent: Color {
+        dark ? green : Color(red: 8 / 255, green: 122 / 255, blue: 50 / 255)
+    }
     private var secondary: Color {
-        small || large ? Color.white.opacity(0.85) : Color(red: 179 / 255, green: 179 / 255, blue: 179 / 255)
+        if !dark { return Color(white: 0.30) }
+        return small || large ? Color.white.opacity(0.85) : Color(red: 179 / 255, green: 179 / 255, blue: 179 / 255)
     }
     private var small: Bool { family == .systemSmall }
     private var large: Bool { family == .systemLarge }
     private let artworkSize: CGFloat = 132
 
-    static var surface: some View {
-        LinearGradient(colors: [Color(white: 0.14), Color(white: 0.07)], startPoint: .topLeading, endPoint: .bottomTrailing)
+    private var surface: some View {
+        LinearGradient(colors: dark ? [Color(white: 0.14), Color(white: 0.07)] : [.white, Color(white: 0.94)],
+                       startPoint: .topLeading, endPoint: .bottomTrailing)
     }
 
     @ViewBuilder var widgetBackground: some View {
         if small || large, let data = entry.artwork, let image = NSImage(data: data) {
-            Color.black
+            (dark ? Color.black : Color.white)
                 .overlay { Image(nsImage: image).resizable().scaledToFill() }
                 .clipped()
                 .overlay {
-                    LinearGradient(stops: large ? [
+                    // Fade toward the current surface to keep text readable over any cover.
+                    LinearGradient(stops: dark ? (large ? [
                         .init(color: .black.opacity(0.75), location: 0),
                         .init(color: .black.opacity(0.12), location: 0.25),
                         .init(color: .black.opacity(0.85), location: 0.62),
@@ -73,10 +82,19 @@ struct MusicWidgetView: View {
                         .init(color: .black.opacity(0.60), location: 0),
                         .init(color: .black.opacity(0.66), location: 0.45),
                         .init(color: .black.opacity(0.90), location: 1)
-                    ], startPoint: .top, endPoint: .bottom)
+                    ]) : (large ? [
+                        .init(color: .white.opacity(0.82), location: 0),
+                        .init(color: .white.opacity(0.12), location: 0.25),
+                        .init(color: .white.opacity(0.90), location: 0.62),
+                        .init(color: .white.opacity(0.98), location: 1)
+                    ] : [
+                        .init(color: .white.opacity(0.80), location: 0),
+                        .init(color: .white.opacity(0.84), location: 0.45),
+                        .init(color: .white.opacity(0.97), location: 1)
+                    ]), startPoint: .top, endPoint: .bottom)
                 }
         } else {
-            Self.surface
+            surface
         }
     }
 
@@ -131,7 +149,7 @@ struct MusicWidgetView: View {
                 }
             }
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(foreground)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .containerBackground(for: .widget) { widgetBackground }
         // Keep background navigation separate from the options' individual links.
@@ -187,7 +205,7 @@ struct MusicWidgetView: View {
         Button(intent: PlaybackIntent(.menu)) {
             Image(systemName: "ellipsis")
                 .font(.system(size: small ? 14 : 17, weight: .semibold))
-                .foregroundStyle(secondary)
+                .foregroundStyle(dark ? secondary : foreground)
                 .frame(width: small ? 24 : 28, height: small ? 40 : 28, alignment: large ? .center : .top)
                 .padding(large ? 6 : 0)
                 .contentShape(Rectangle())
@@ -199,14 +217,14 @@ struct MusicWidgetView: View {
     private func option(_ title: String, icon: String, url: URL) -> some View {
         Link(destination: url) {
             HStack(spacing: small ? 6 : 9) {
-                Image(systemName: icon).foregroundStyle(green).frame(width: small ? 14 : 18).accessibilityHidden(true)
+                Image(systemName: icon).foregroundStyle(accent).frame(width: small ? 14 : 18).accessibilityHidden(true)
                 Text(title).font(.system(size: large ? 14 : small ? 11 : 12, weight: .medium)).lineLimit(1)
                 Spacer(minLength: 0)
                 Image(systemName: "chevron.right").font(.system(size: 9, weight: .semibold))
                     .foregroundStyle(secondary).accessibilityHidden(true)
             }
             .padding(.horizontal, small ? 8 : 10).frame(height: large ? 40 : small ? 32 : 28)
-            .background(Color.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 7))
+            .background(dark ? Color.white.opacity(0.07) : Color.black.opacity(0.06), in: RoundedRectangle(cornerRadius: 7))
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -222,7 +240,7 @@ struct MusicWidgetView: View {
                     Image(nsImage: image).resizable().scaledToFill()
                 }
             } else {
-                (large ? Color.clear : Color(white: 0.19)).overlay {
+                (large ? Color.clear : Color(white: dark ? 0.19 : 0.88)).overlay {
                     if let url = Bundle.main.url(forResource: "BrandMark", withExtension: "png"),
                        let image = NSImage(contentsOf: url) {
                         Image(nsImage: image).resizable().scaledToFit().padding(7)
@@ -249,7 +267,7 @@ struct MusicWidgetView: View {
                 }
                 #endif
             }
-            .tint(green)
+            .tint(accent)
             .frame(height: small || large ? 4 : 3).clipShape(Capsule())
             .accessibilityHidden(true)
             .frame(height: 18)
@@ -296,8 +314,8 @@ struct MusicWidgetView: View {
     private var progressTrack: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                Capsule().fill(Color.white.opacity(0.18))
-                Capsule().fill(green).frame(width: geometry.size.width * entry.playback.progress)
+                Capsule().fill(dark ? Color.white.opacity(0.18) : Color.black.opacity(0.18))
+                Capsule().fill(accent).frame(width: geometry.size.width * entry.playback.progress)
             }
         }
     }
@@ -306,7 +324,7 @@ struct MusicWidgetView: View {
         let opensSpotify = command == .toggle && entry.playback.title.isEmpty
         let image = Image(systemName: icon)
                 .font(.system(size: large ? 20 : command == .toggle ? 15 : 17, weight: .semibold))
-                .foregroundStyle(command == .toggle ? Color.black : Color.white)
+                .foregroundStyle(command == .toggle ? Color.black : foreground)
                 .frame(width: large ? 50 : small ? 32 : 36, height: large ? 50 : small ? 32 : 36)
                 .background {
                     if command == .toggle { Circle().fill(green) }
@@ -338,8 +356,6 @@ struct SpotifyMiniWidget: Widget {
     }
 }
 
-#endif
-
 #Preview("Small", as: .systemSmall) {
     SpotifyMiniWidget()
 } timeline: {
@@ -357,3 +373,4 @@ struct SpotifyMiniWidget: Widget {
 } timeline: {
     MusicEntry(date: .now, playback: Playback(title: "Your music", artist: "Spotify", position: 65, duration: 240, canControl: true, message: ""))
 }
+#endif

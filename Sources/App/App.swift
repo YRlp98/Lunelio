@@ -6,10 +6,15 @@ import ServiceManagement
 
 struct SetupView: View {
     @ObservedObject var model: PlayerModel
+    @Environment(\.colorScheme) private var colorScheme
     let onHideMenuBarIconChange: (Bool) -> Void
     @AppStorage("hideMenuBarIcon") private var hideMenuBarIcon = false
     @State private var loginError = ""
     @State private var login = SMAppService.mainApp.status == .enabled
+
+    private var connectedColor: Color {
+        colorScheme == .dark ? .green : Color(red: 8 / 255, green: 122 / 255, blue: 50 / 255)
+    }
 
     var body: some View {
         ScrollView {
@@ -53,7 +58,7 @@ struct SetupView: View {
                 }
             }
             Text(model.playback.title.isEmpty ? model.playback.message : "Connected · \(model.playback.title)")
-                .font(.callout).foregroundStyle(model.playback.canControl ? Color.green : Color.secondary)
+                .font(.callout).foregroundStyle(model.playback.canControl ? connectedColor : Color.secondary)
                 .textSelection(.enabled).fixedSize(horizontal: false, vertical: true)
             Divider()
             Text("Desktop & Notification Center").font(.headline)

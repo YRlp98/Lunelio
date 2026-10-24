@@ -1,6 +1,25 @@
 # Changelog
 
-## 0.2.2-beta — Unreleased
+## 1.0.0 — Unreleased
+
+### Added
+
+- Light mode for small, medium, and large widgets, including the inline menu and disconnected state. The theme follows the system appearance automatically.
+- Dark text, light surfaces, artwork fades, and contrasting green progress and menu icons in light mode. Keep the existing dark appearance.
+- Improve the Settings connection status contrast in light mode.
+
+### Changed
+
+- Move the app, widget, and Chrome connector to the shared stable version **1.0.0**.
+- Include the playback and efficiency improvements recorded in the 0.2.2-beta development build below, which was not published separately.
+- Refresh the README with a dark-mode cover, light and dark widget previews, current Settings, and a live GitHub stars badge.
+
+### Validation
+
+- Rendered all three sizes in light and dark mode with playback, menus, disconnected states, long titles, and bright, dark, or missing artwork. Twelve static dark-mode comparisons match the previous appearance pixel for pixel.
+- Passed 14 Swift regression tests and 12 build-script tests, including stable connector version generation. Confirmed the live system switch to Dark; Settings follows both appearances and displays **1.0.0**.
+
+## 0.2.2-beta — Development build
 
 Includes the changes tested locally as 0.2.0-beta and 0.2.1-beta; those builds were not published.
 
