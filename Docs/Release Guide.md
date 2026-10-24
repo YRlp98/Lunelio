@@ -6,7 +6,7 @@ The packager uses a separate app copy, replaces the development connection token
 
 ## Downloads
 
-Publish each release through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The latest published release is **v0.1.2-beta**; the next release tag is **v1.0.0**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that the app is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
+Publish each release through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The current release is **[v1.0.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0)**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that the app is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
 
 Record each release in [CHANGELOG.md](../CHANGELOG.md). Replace its Unreleased label with the publication date and copy that version’s changes into the GitHub release notes. Publish 1.0.0 as a full release, with the pre-release checkbox off. Keep older beta releases marked as pre-releases.
 

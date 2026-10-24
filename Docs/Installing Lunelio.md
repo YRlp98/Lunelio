@@ -1,15 +1,15 @@
 # Install Lunelio
 
-Requires **macOS 14 or later**. The beta installer includes Apple silicon and Intel binaries. You do not need Xcode, a compiler, or a paid Spotify account to use Lunelio.
+Requires **macOS 14 or later**. The installer includes Apple silicon and Intel binaries. You do not need Xcode, a compiler, or a paid Spotify account to use Lunelio.
 
-1. Download **[Lunelio-0.1.2-beta.dmg](https://github.com/YRlp98/Lunelio/releases/download/v0.1.2-beta/Lunelio-0.1.2-beta.dmg)** from the [GitHub release](https://github.com/YRlp98/Lunelio/releases/tag/v0.1.2-beta).
+1. Download **[Lunelio-1.0.0.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.0.0/Lunelio-1.0.0.dmg)** from the [GitHub release](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0).
 2. Open it and drag **Lunelio** to **Applications**. Quit an older copy before replacing it.
 3. Open Lunelio from Applications, then eject the disk image.
 4. Right-click the desktop → **Edit Widgets → Lunelio** and add a small, medium, or large widget. You can also add it in Notification Center.
 
 ## macOS security approval
 
-This beta is locally signed, without Apple Developer ID signing or notarization. If macOS cannot verify the developer, only proceed if you trust the download’s source. After trying to open it, go to **System Settings → Privacy & Security → Open Anyway** and confirm the app. Do not override alerts that say the app will damage your computer. See [Apple’s guidance](https://support.apple.com/en-us/102445).
+The app is locally signed, without Apple Developer ID signing or notarization. If macOS cannot verify the developer, only proceed if you trust the download’s source. After trying to open it, go to **System Settings → Privacy & Security → Open Anyway** and confirm the app. Do not override alerts that say the app will damage your computer. See [Apple’s guidance](https://support.apple.com/en-us/102445).
 
 ## Connect Spotify
 

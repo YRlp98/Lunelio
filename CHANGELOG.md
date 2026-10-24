@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — Unreleased
+## [1.0.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0) — 2026-10-24
 
 ### Added
 

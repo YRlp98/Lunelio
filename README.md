@@ -9,12 +9,12 @@ Free to use, with all features included. No Spotify Premium subscription or API 
 
 See what’s playing, pause, skip, and seek from your desktop or Notification Center.
 
-[![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-1DB954?style=flat-square)](CHANGELOG.md#100--unreleased)
+[![Release 1.0.0](https://img.shields.io/badge/release-v1.0.0-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1DB954?style=flat-square)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/YRlp98/Lunelio?style=flat-square&logo=github&label=stars)](https://github.com/YRlp98/Lunelio/stargazers)
 [![macOS 14+](https://img.shields.io/badge/macOS-14%2B-555555?style=flat-square&logo=apple)](#current-support)
 
-[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases)
+[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/download/v1.0.0/Lunelio-1.0.0.dmg)
 
 ![Lunelio cover with dark macOS widgets playing Breathing Stone by Tenno](Docs/Images/lunelio-cover.webp)
 
@@ -23,7 +23,7 @@ See what’s playing, pause, skip, and seek from your desktop or Notification Ce
 - **macOS 14 or later.** Support for other operating systems is planned.
 - **Spotify Desktop and the Spotify web player in Google Chrome.** More browsers are planned.
 
-Version **1.0.0** is being prepared for release, with automatic light and dark themes and about **80% lower CPU usage** in our short Chrome playback test. [Changelog](CHANGELOG.md#100--unreleased) · [Published releases](https://github.com/YRlp98/Lunelio/releases).
+Current release: **[1.0.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0)**, with automatic light and dark themes and about **80% lower CPU usage** in our short Chrome playback test. [Changelog](CHANGELOG.md#100--2026-10-24) · [All releases](https://github.com/YRlp98/Lunelio/releases).
 
 ## Features
 
@@ -56,7 +56,7 @@ I’m actively improving Lunelio and adding more features.
 
 ## How to use
 
-Download the **Mac installer (.dmg)** from [Releases](https://github.com/YRlp98/Lunelio/releases), open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
+Download **[Lunelio-1.0.0.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.0.0/Lunelio-1.0.0.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
 
 The app is not notarized yet. See the [installation guide](Docs/Installing%20Lunelio.md) if macOS blocks it.
 
