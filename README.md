@@ -7,9 +7,7 @@ A handy macOS widget for [Spotify Desktop](https://www.spotify.com/download/mac/
 
 Keep track of what’s playing and control Spotify quickly from your Mac’s desktop or Notification Center. Play, pause, skip, and seek without switching apps.
 
-Designed to stay lightweight and efficient. Background checks stop when no player is connected, keeping idle activity low.
-
-Free and open source, with all features included. No Spotify Premium subscription or API key required by Lunelio. Spotify’s own playback rules still apply.
+Free and open source, with all features included. Built to be lightweight and efficient. No Spotify Premium subscription or API key required by Lunelio. Spotify’s own playback rules still apply.
 
 [![Release 1.0.0](https://img.shields.io/badge/release-v1.0.0-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1DB954?style=flat-square)](LICENSE)
@@ -34,7 +32,6 @@ Current release: **[1.0.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0
 - Play/pause, previous, and next controls.
 - Click the progress bar to seek in 10% steps, from 0% to 100%.
 - Automatic switching between Spotify Desktop and Chrome based on what’s playing.
-- The Chrome helper closes when the last Spotify tab closes and reconnects automatically when needed.
 - Start at login and hide the menu-bar icon from Settings.
 
 I’m actively improving Lunelio and adding more features.
@@ -98,7 +95,7 @@ Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** t
 ./package.command # Create the installer in build/Downloads/
 ```
 
-The current development version is **1.0.0**. The app, widget, and connector share their version in **Config/Version.xcconfig**. The Chrome connection waits for commands during playback and exits when no Spotify tabs remain. Background polling stops when no player is connected. Both reconnect automatically.
+The current development version is **1.0.0**. The app, widget, and connector share their version in **Config/Version.xcconfig**.
 
 See [Editing in Xcode](Docs/Editing%20in%20Xcode.md) for the code map and [Release Guide](Docs/Release%20Guide.md) for distribution details.
 
