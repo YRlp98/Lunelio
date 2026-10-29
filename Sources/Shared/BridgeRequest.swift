@@ -28,7 +28,9 @@ struct BridgeRequest {
     }
 
     func authorized(token: String) -> Bool {
-        !token.isEmpty && headers["x-mini-token"] == token && headers["origin"] == nil
+        !token.isEmpty && headers["x-mini-token"] == token
+            && ["127.0.0.1:\(LocalBridge.port)", "localhost:\(LocalBridge.port)"].contains(headers["host"] ?? "")
+            && headers["origin"] == nil
             && headers["transfer-encoding"] == nil
     }
 }

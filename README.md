@@ -95,7 +95,7 @@ Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** t
 ./package.command # Create the installer in build/Downloads/
 ```
 
-The current development version is **1.0.0**. The app, widget, and connector share their version in **Config/Version.xcconfig**.
+The current development version is **1.0.1**. The app, widget, and connector share their version in **Config/Version.xcconfig**.
 
 See [Editing in Xcode](Docs/Editing%20in%20Xcode.md) for the code map and [Release Guide](Docs/Release%20Guide.md) for distribution details.
 
