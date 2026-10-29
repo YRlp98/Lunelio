@@ -9,12 +9,12 @@ Keep track of what’s playing and control Spotify quickly from your Mac’s des
 
 Free and open source, with all features included. Built to be lightweight and efficient. No Spotify Premium subscription or API key required by Lunelio. Spotify’s own playback rules still apply.
 
-[![Release 1.0.0](https://img.shields.io/badge/release-v1.0.0-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0)
+[![Release 1.0.1](https://img.shields.io/badge/release-v1.0.1-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1DB954?style=flat-square)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/YRlp98/Lunelio?style=flat-square&logo=github&label=stars)](https://github.com/YRlp98/Lunelio/stargazers)
 [![macOS 14+](https://img.shields.io/badge/macOS-14%2B-555555?style=flat-square&logo=apple)](#current-support)
 
-[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/download/v1.0.0/Lunelio-1.0.0.dmg)
+[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/download/v1.0.1/Lunelio-1.0.1.dmg)
 
 ![Lunelio cover with dark macOS widgets playing Breathing Stone by Tenno](Docs/Images/lunelio-cover.webp)
 
@@ -23,7 +23,7 @@ Free and open source, with all features included. Built to be lightweight and ef
 - **macOS 14 or later.** Support for other operating systems is planned.
 - **Spotify Desktop and the Spotify web player in Google Chrome.** More browsers are planned.
 
-Current release: **[1.0.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0)**, with automatic light and dark themes and about **80% lower CPU usage** in our short Chrome playback test. [Changelog](CHANGELOG.md#100--2026-10-24) · [All releases](https://github.com/YRlp98/Lunelio/releases).
+Current release: **[1.0.1](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1)**, with a DNS rebinding protection fix. [Changelog](CHANGELOG.md#101--2026-10-29) · [All releases](https://github.com/YRlp98/Lunelio/releases).
 
 ## Features
 
@@ -56,7 +56,7 @@ I’m actively improving Lunelio and adding more features.
 
 ## How to use
 
-Download **[Lunelio-1.0.0.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.0.0/Lunelio-1.0.0.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
+Download **[Lunelio-1.0.1.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.0.1/Lunelio-1.0.1.dmg)**, open it, and drag **Lunelio** to **Applications**. No Xcode is needed to use the app.
 
 The app is not notarized yet. See the [installation guide](Docs/Installing%20Lunelio.md) if macOS blocks it.
 

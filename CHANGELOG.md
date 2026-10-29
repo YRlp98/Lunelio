@@ -1,11 +1,10 @@
 # Changelog
 
-## Unreleased
+## [1.0.1](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1) — 2026-10-29
 
 ### Security
 
-- Reject local bridge requests unless the `Host` header is `127.0.0.1:49178` or `localhost:49178`.
-- Set the next development version to **1.0.1** (build **38**).
+- Reject local bridge requests unless the `Host` header is `127.0.0.1:49178` or `localhost:49178` to guard against DNS rebinding.
 
 ## [1.0.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.0) — 2026-10-24
 
