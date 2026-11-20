@@ -6,7 +6,7 @@ The packager uses a separate app copy, replaces the development connection token
 
 ## Downloads
 
-Publish each release through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The current release is **[v1.0.1](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1)**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that the app is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
+Publish each release through [GitHub Releases](https://github.com/YRlp98/Lunelio/releases), with a matching version tag, the DMG, and its `.sha256` file. The current release is **[v1.1.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.1.0)**. Keep the README’s release summary and the README and installation guide’s download links in sync with the release. Users drag the app to Applications; they do not build it. Explain that the app is not notarized and link [Installing Lunelio](Installing%20Lunelio.md).
 
 Record each release in [CHANGELOG.md](../CHANGELOG.md) and copy that version’s changes into the GitHub release notes. Publish stable versions as full releases, with the pre-release checkbox off. Keep older beta releases marked as pre-releases.
 
@@ -23,7 +23,9 @@ The current build uses local signing, so macOS may require a one-time security a
 3. Publish the connector after review. Set `Resources/extension-store-url.txt` to its actual `https://chromewebstore.google.com/…` listing URL, then rebuild. The existing Add Chrome Connector button will open that listing automatically.
 4. Confirm the store-installed extension can connect, display artwork and song metadata, pause/resume, and skip in both a regular Spotify tab and the installed Chrome Spotify web app. Check reconnecting after Chrome and Mac restarts.
 
-The connector requests native messaging and access only to `https://open.spotify.com/*`. It sends playback information to the local companion. Do not request broader browser permissions for distribution.
+The connector requests native messaging and access to `https://open.spotify.com/*` for playback and `https://api.github.com/*` for release checks when its popup opens. It sends playback information to the local companion. Keep browser access limited to these hosts.
+
+The app’s Settings check and the connector’s update tag use GitHub’s latest stable release. Publish a full release with the installer attached for users to receive an update notice; pushing code or adding a tag alone is insufficient. Updates are downloaded and installed manually.
 
 Chrome documentation: [Publishing](https://developer.chrome.com/docs/webstore/publish/), [stable extension IDs](https://developer.chrome.com/docs/extensions/reference/manifest/key), [native messaging](https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging).
 

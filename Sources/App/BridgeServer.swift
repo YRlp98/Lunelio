@@ -3,29 +3,59 @@ import Network
 
 @MainActor
 final class BridgeServer {
+    private let port: UInt16
     private var listener: NWListener?
+    private var retryTask: Task<Void, Never>?
     private var connections: [UUID: NWConnection] = [:]
     private var timeouts: [UUID: Task<Void, Never>] = [:]
     var handler: ((PlayerCommand?) async -> Playback)?
     var browserHandler: ((BrowserMessage) async -> Data)?
     var onError: ((String) -> Void)?
 
+    init(port: UInt16 = LocalBridge.port) { self.port = port }
+
     func start() {
+        guard listener == nil, retryTask == nil else { return }
         do {
             let parameters = NWParameters.tcp
-            parameters.requiredLocalEndpoint = .hostPort(host: "127.0.0.1", port: NWEndpoint.Port(rawValue: LocalBridge.port)!)
+            parameters.requiredLocalEndpoint = .hostPort(host: "127.0.0.1", port: NWEndpoint.Port(rawValue: port)!)
             let listener = try NWListener(using: parameters)
             self.listener = listener
-            listener.stateUpdateHandler = { [weak self] state in
-                if case let .failed(error) = state {
-                    Task { @MainActor in self?.onError?("The gallery widget connection is unavailable: \(error.localizedDescription)") }
+            listener.stateUpdateHandler = { [weak self, weak listener] state in
+                Task { @MainActor in
+                    guard let self, let listener, self.listener === listener else { return }
+                    switch state {
+                    case .ready: self.onError?("")
+                    case .failed(let error): self.retry(after: error)
+                    default: break
+                    }
                 }
             }
             listener.newConnectionHandler = { [weak self] connection in
                 Task { @MainActor in self?.accept(connection) }
             }
             listener.start(queue: .main)
-        } catch { onError?(error.localizedDescription) }
+        } catch { retry(after: error) }
+    }
+
+    private func retry(after error: Error) {
+        listener?.cancel()
+        listener = nil
+        // A brief port conflict at login must not leave the widget disconnected until the app restarts.
+        retryTask = Task { [weak self] in
+            do { try await Task.sleep(for: .seconds(2)) } catch { return }
+            self?.retryTask = nil
+            self?.start()
+        }
+        onError?("The widget connection is unavailable: \(error.localizedDescription). Retrying…")
+    }
+
+    func stop() {
+        retryTask?.cancel()
+        retryTask = nil
+        listener?.cancel()
+        listener = nil
+        for id in Array(connections.keys) { finish(id) }
     }
 
     private func accept(_ connection: NWConnection) {

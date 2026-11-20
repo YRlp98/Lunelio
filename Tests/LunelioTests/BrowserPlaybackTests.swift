@@ -5,7 +5,7 @@ import Testing
 @Test("Chrome helper stops when unused and reconnects without interrupting another player", arguments: [
     "last-tab", "navigate", "redacted-url", "multiple-tabs", "paused-player", "reopen",
     "settings", "multiple-settings", "settings-with-player", "snapshot-during-check",
-    "stale-query", "query-failure", "settings-during-check", "old-command"
+    "stale-query", "query-failure", "settings-during-check", "old-command", "failed-settings", "closed-popup"
 ])
 @MainActor
 func browserWorkerLifecycle(scenario: String) async throws {
@@ -54,7 +54,13 @@ func browserWorkerLifecycle(scenario: String) async throws {
           chrome.runtime.onMessage.emit({kind:'snapshot', playback:{playing:false}},
             {tab:{id}, url:'https://open.spotify.com/'}, () => {});
         }
-        function openSettings() { chrome.runtime.onMessage.emit({kind:'open'}, {}, () => {}); }
+        const settingsReplies = [];
+        function openSettings(popupClosed = false) {
+          chrome.runtime.onMessage.emit({kind:'open'}, {}, reply => {
+            if (popupClosed) throw new Error('Popup already closed');
+            settingsReplies.push(reply);
+          });
+        }
         let finished = false, failure = '';
         """)
     context.evaluateScript(source)
@@ -64,10 +70,17 @@ func browserWorkerLifecycle(scenario: String) async throws {
         (async () => {
           check(ports.length === 0, 'Started helper before Spotify or Settings needed it');
           const scenario = \(scenarioJSON);
-          if (scenario === 'settings' || scenario === 'multiple-settings') {
+          if (['settings', 'multiple-settings', 'failed-settings', 'closed-popup'].includes(scenario)) {
             tabs = [];
-            openSettings();
+            openSettings(scenario === 'closed-popup');
             const connection = ports[0];
+            check(connection.messages[0].kind === 'open', 'Lost Settings request');
+            check(settingsReplies.length === 0, 'Reported Settings open before the helper acknowledged it');
+            if (scenario === 'failed-settings') {
+              connection.onDisconnect.emit();
+              check(settingsReplies[0]?.connected === false, 'Missing helper did not report failure');
+              return;
+            }
             if (scenario === 'multiple-settings') openSettings();
             await chrome.tabs.onRemoved.emit(99);
             check(!connection.disconnected, 'Closed before Settings handoff finished');
@@ -77,6 +90,7 @@ func browserWorkerLifecycle(scenario: String) async throws {
               await connection.onMessage.emit({kind:'opened'});
             }
             check(connection.disconnected, 'Settings left an idle helper');
+            check(settingsReplies.every(reply => reply.connected === true), 'Settings handoff reported failure');
             return;
           }
           snapshot();
@@ -152,6 +166,70 @@ func browserWorkerLifecycle(scenario: String) async throws {
     #expect(context.exception == nil, "\(context.exception?.toString() ?? "")")
     #expect(context.evaluateScript("finished")?.toBool() == true, "Lifecycle scenario did not finish: \(scenario)")
     #expect(context.evaluateScript("failure")?.toString() == "", "\(context.evaluateScript("failure")?.toString() ?? scenario)")
+}
+
+@Test("Connector shows only newer stable updates without starting the native helper", arguments: [
+    "patch", "minor", "major", "beta-to-stable", "same", "older", "older-major", "draft", "prerelease",
+    "invalid-tag", "leading-zero", "overflow", "missing-tag", "offline", "timeout", "rate-limit", "bad-json"
+])
+@MainActor
+func connectorUpdateTag(scenario: String) async throws {
+    let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let source = try String(contentsOf: root.appendingPathComponent("BrowserExtension/popup.js"), encoding: .utf8)
+    let context = try #require(JSContext())
+    let scenarioJSON = String(decoding: try JSONEncoder().encode(scenario), as: UTF8.self)
+    context.evaluateScript("""
+        function check(value, message) { if (!value) throw new Error(message); }
+        const scenario = \(scenarioJSON);
+        const elements = {};
+        const document = {querySelector(selector) {
+          return elements[selector] ||= {textContent:'',hidden:true,addEventListener(event,callback) {this.click = callback;}};
+        }};
+        let request, finished = false, fetches = 0;
+        const installed = scenario === 'minor' ? '1.9.3' : scenario === 'older-major' ? '2.0.0' : '1.0.1';
+        const chrome = {runtime:{
+          getManifest:() => ({version:installed, version_name:scenario === 'beta-to-stable' ? '1.0.1-beta' : installed}),
+          sendMessage:async message => {request = message; return {connected:true};}
+        }};
+        const AbortSignal = {timeout:ms => {check(ms === 10000, 'Missing deadline'); return 'deadline';}};
+        const tags = {patch:'v1.0.2', minor:'v1.10.0', major:'v2.0.0', same:'v1.0.1', older:'v1.0.0',
+          'older-major':'v1.99.99', 'invalid-tag':'v1.0.2-beta', 'leading-zero':'v01.0.2',
+          overflow:'v9007199254740992.0.0', 'missing-tag':null, 'beta-to-stable':'v1.0.1'};
+        async function fetch(url, options) {
+          fetches++;
+          check(url === 'https://api.github.com/repos/YRlp98/Lunelio/releases/latest', 'Wrong update endpoint');
+          check(options.credentials === 'omit' && options.signal === 'deadline', 'Missing privacy or timeout setting');
+          check(options.headers.Accept === 'application/vnd.github+json', 'Wrong API response type');
+          if (scenario === 'offline' || scenario === 'timeout') throw new Error(scenario);
+          return {ok:scenario !== 'rate-limit', async json() {
+            if (scenario === 'bad-json') throw new SyntaxError('Invalid JSON');
+            return {tag_name:tags[scenario] ?? (scenario === 'missing-tag' ? null : 'v1.0.2'),
+              draft:scenario === 'draft', prerelease:scenario === 'prerelease'};
+          }};
+        }
+        """)
+    context.evaluateScript(source)
+    // All mocked requests settle immediately; drain their promise continuations.
+    context.evaluateScript("Promise.resolve().then(() => {}).then(() => {}).then(() => {finished = true;});")
+    for _ in 0..<100 where context.evaluateScript("finished")?.toBool() != true {
+        try await Task.sleep(for: .milliseconds(5))
+    }
+    #expect(context.exception == nil)
+    #expect(context.evaluateScript("finished")?.toBool() == true)
+    #expect(context.evaluateScript("fetches")?.toInt32() == 1)
+    #expect(context.evaluateScript("request === undefined")?.toBool() == true)
+    let shouldShow = ["patch", "minor", "major", "beta-to-stable"].contains(scenario)
+    #expect(context.evaluateScript("document.querySelector('#update').hidden")?.toBool() == !shouldShow)
+    #expect(context.evaluateScript("elements['#updates'] === undefined")?.toBool() == true)
+    context.evaluateScript("elements['#show'].click().finally(() => {finished = false;});")
+    for _ in 0..<100 where context.evaluateScript("finished")?.toBool() != false {
+        try await Task.sleep(for: .milliseconds(5))
+    }
+    #expect(context.evaluateScript("request.kind")?.toString() == "open")
+    #expect(context.evaluateScript("Object.keys(request).length")?.toInt32() == 1)
+    let html = try String(contentsOf: root.appendingPathComponent("BrowserExtension/popup.html"), encoding: .utf8)
+    #expect(html.contains("href=\"https://github.com/YRlp98/Lunelio/releases/latest\""))
+    #expect(html.contains("rel=\"noopener noreferrer\" hidden>Update available</a>"))
 }
 
 @Test("Profile selection, delivery, acknowledgements, and disconnect")

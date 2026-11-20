@@ -84,8 +84,9 @@ In Lunelio Settings, click Add Chrome connector to reveal its folder.
 Open chrome://extensions, enable Developer mode, choose Load unpacked,
 and select the revealed folder. Open https://open.spotify.com and reload once.
 Start a song in Spotify, then use the widget controls. After connector updates,
-reload your Spotify tabs. If a freshly reopened tab does not start from the
-widget, click Play in Spotify once.
+reload Lunelio Connector in chrome://extensions, then reload your Spotify tabs.
+If a freshly reopened tab does not start from the widget, click Play in Spotify
+once.
 Install the app in Applications before loading the connector; Chrome keeps
 using the folder you select.
 
@@ -94,6 +95,13 @@ Use the widget buttons to play, pause, or skip; click the progress bar to seek.
 The three dots show Settings and Open Spotify inside the widget.
 Automatic selects the playing source, with Desktop taking priority in a tie.
 The widget theme follows the system's light or dark appearance automatically.
+
+UPDATE
+In Settings, click Check for Updates. The Chrome connector checks when you open
+its popup and shows Update available beside its version for a newer release.
+Follow the link to GitHub, download the new DMG, quit Lunelio, replace the app in
+Applications, and reopen it. Updates are installed manually. If you use the
+Chrome connector, reload it in chrome://extensions, then reload Spotify tabs.
 
 MACOS INSTALLATION
 This app is locally signed, not Developer ID signed or notarized by Apple.

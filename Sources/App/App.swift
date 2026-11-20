@@ -6,6 +6,7 @@ import ServiceManagement
 
 struct SetupView: View {
     @ObservedObject var model: PlayerModel
+    @ObservedObject var updates: UpdateChecker
     @Environment(\.colorScheme) private var colorScheme
     let onHideMenuBarIconChange: (Bool) -> Void
     @AppStorage("hideMenuBarIcon") private var hideMenuBarIcon = false
@@ -28,8 +29,26 @@ struct SetupView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Lunelio").font(.system(size: 26, weight: .semibold))
                     Text("Your music, within reach.").foregroundStyle(.secondary)
-                    if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleGetInfoString") as? String {
-                        Text("Version \(version)").font(.caption).foregroundStyle(.secondary)
+                    HStack(spacing: 12) {
+                        if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleGetInfoString") as? String {
+                            Text("Version \(version)").font(.caption).foregroundStyle(.secondary)
+                        }
+                        Button(updates.isChecking ? "Checking…" : "Check for Updates") {
+                            Task { await updates.check() }
+                        }.controlSize(.small).disabled(updates.isChecking)
+                    }
+                }
+            }
+            if let message = updates.resultMessage {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(message).font(.callout).fixedSize(horizontal: false, vertical: true)
+                        .textSelection(.enabled)
+                    switch updates.state {
+                    case .available:
+                        Link("View Update", destination: UpdateChecker.releasesURL)
+                    case .failed:
+                        Link("View Releases on GitHub", destination: UpdateChecker.releasesURL)
+                    default: EmptyView()
                     }
                 }
             }
@@ -91,6 +110,7 @@ struct SetupView: View {
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     let model = PlayerModel()
+    private let updates = UpdateChecker()
     private let server = BridgeServer()
     private var setupWindow: NSWindow?
     private var status: NSStatusItem?
@@ -110,7 +130,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             }
             return self.model.playback
         }
-        server.onError = { [weak self] message in self?.model.serverMessage = message }
+        server.onError = { [weak self] message in
+            self?.model.serverMessage = message
+            if message.isEmpty { WidgetCenter.shared.reloadTimelines(ofKind: "SpotifyMiniWidget") }
+        }
         server.start()
         server.browserHandler = { [weak self] message in
             guard let self else { return Data("{}".utf8) }
@@ -174,7 +197,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 490, height: 640),
                 styleMask: [.titled, .closable], backing: .buffered, defer: false)
             window.title = "Lunelio · Settings"
-            window.contentView = NSHostingView(rootView: SetupView(model: model,
+            window.contentView = NSHostingView(rootView: SetupView(model: model, updates: updates,
                 onHideMenuBarIconChange: { [weak self] hidden in self?.status?.isVisible = !hidden }))
             window.isReleasedWhenClosed = false
             window.delegate = self

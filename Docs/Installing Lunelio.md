@@ -2,7 +2,7 @@
 
 Requires **macOS 14 or later**. The installer includes Apple silicon and Intel binaries. You do not need Xcode, a compiler, or a paid Spotify account to use Lunelio.
 
-1. Download **[Lunelio-1.0.1.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.0.1/Lunelio-1.0.1.dmg)** from the [GitHub release](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1).
+1. Download **[Lunelio-1.1.0.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.1.0/Lunelio-1.1.0.dmg)** from the [GitHub release](https://github.com/YRlp98/Lunelio/releases/tag/v1.1.0).
 2. Open it and drag **Lunelio** to **Applications**. Quit an older copy before replacing it.
 3. Open Lunelio from Applications, then eject the disk image.
 4. Right-click the desktop → **Edit Widgets → Lunelio** and add a small, medium, or large widget. You can also add it in Notification Center.
@@ -20,3 +20,9 @@ The app is locally signed, without Apple Developer ID signing or notarization. I
 After updating the connector, reload your Spotify tabs again. If a freshly reopened tab does not start from the widget, click Play in Spotify once.
 
 Use the widget’s **••• → Settings…** menu to choose a source, hide the menu-bar icon, or start the connection at login. Spotify’s playback rules still apply.
+
+## Update Lunelio
+
+In Settings, click **Check for Updates**. The Chrome connector checks when its popup opens and shows an **Update available** tag beside its version when a newer stable release is available. Both link to GitHub so you can download the new DMG.
+
+Quit Lunelio, replace the app in **Applications**, and reopen it. If you use the Chrome connector, reload it in `chrome://extensions`, then reload your Spotify tabs. Updates are installed manually.

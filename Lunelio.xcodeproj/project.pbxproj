@@ -284,6 +284,7 @@
 			"isa" = "PBXGroup";
 			"name" = "App";
 			"children" = (
+				"6CD6DAA504D24A3D97F97781",
 				"3DA2C8FF4BD2DD8AF9F968D9",
 				"9EF5C8DDB53F3E5E1E058EB5",
 				"223565B5AC8A4B960818A784",
@@ -319,6 +320,7 @@
 			"isa" = "PBXGroup";
 			"name" = "Tests";
 			"children" = (
+				"C4818BA3740E4FBAABBF61D3",
 				"7F2ECB68F1AF9CF16154030B",
 				"44483D47881D6B2CAD2531DB",
 				"D226C23BC0F1BDF931EF1C2C",
@@ -377,6 +379,7 @@
 			"isa" = "PBXSourcesBuildPhase";
 			"buildActionMask" = "2147483647";
 			"files" = (
+				"EA35D8597D7A4B2CB0AFFB79",
 				"1B0AAE8FC13C03CEC0309D9D",
 				"7223472A6D763D7597F9D162",
 				"310F18BD1C2201DC500ABABA",
@@ -999,6 +1002,9 @@
 			"isa" = "PBXSourcesBuildPhase";
 			"buildActionMask" = "2147483647";
 			"files" = (
+				"28CD339C180A4591BB2E51A3",
+				"1775A6D062D34CB8AE35C055",
+				"B8B37FF377E949028095AF90",
 				"26B7BCC8942C9CA5DE842287",
 				"365E266B5998C1CFB536BB76",
 				"2403E0090C007A44C9331617",
@@ -1278,6 +1284,36 @@
 		"ECC21D03BE69300E07E47BF5" = {
 			"isa" = "PBXBuildFile";
 			"fileRef" = "F371C043E744A58531A0CC9D";
+		};
+		"B8B37FF377E949028095AF90" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6753EAA22E1DA11DB59DF0A5";
+		};
+		"6CD6DAA504D24A3D97F97781" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/App/UpdateChecker.swift";
+			"name" = "UpdateChecker.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"EA35D8597D7A4B2CB0AFFB79" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6CD6DAA504D24A3D97F97781";
+		};
+		"28CD339C180A4591BB2E51A3" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6CD6DAA504D24A3D97F97781";
+		};
+		"C4818BA3740E4FBAABBF61D3" = {
+			"isa" = "PBXFileReference";
+			"path" = "Tests/LunelioTests/UpdateCheckerTests.swift";
+			"name" = "UpdateCheckerTests.swift";
+			"lastKnownFileType" = "sourcecode.swift";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"1775A6D062D34CB8AE35C055" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C4818BA3740E4FBAABBF61D3";
 		};
 		"D226C23BC0F1BDF931EF1C2C" = {
 			"path" = "Tests/LunelioTests/BridgeProtocolTests.swift";

@@ -13,7 +13,8 @@
     "nativeMessaging"
   ],
   "host_permissions": [
-    "https://open.spotify.com/*"
+    "https://open.spotify.com/*",
+    "https://api.github.com/*"
   ],
   "background": {
     "service_worker": "worker.js"

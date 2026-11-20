@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.1.0) — 2026-11-20
+
+### Added
+
+- Check for the latest stable Lunelio release from Settings and open its GitHub release page when an update is available.
+- Show an “Update available” tag beside the Chrome connector’s version when a newer stable release is available. Click it to open the release download page.
+
+Update checks run when requested in Settings or when the Chrome popup opens. Users download and install updates themselves.
+
+### Fixed
+
+- Recover the widget connection automatically after a temporary port conflict during app startup.
+- Open Settings reliably from the Chrome connector, including when Lunelio needs to start first.
+
 ## [1.0.1](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1) — 2026-10-29
 
 ### Security

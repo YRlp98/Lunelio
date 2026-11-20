@@ -41,12 +41,18 @@ final class NativeHost {
                 if message.kind == "disconnect" { await close(); return }
                 if message.kind == "open" {
                     let configuration = NSWorkspace.OpenConfiguration(); configuration.activates = false
-                    _ = try? await NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration)
+                    do {
+                        _ = try await NSWorkspace.shared.open([LocalBridge.settingsURL], withApplicationAt: Bundle.main.bundleURL,
+                                                              configuration: configuration)
+                        write(Data(#"{"kind":"opened"}"#.utf8))
+                    } catch {
+                        write(Data(#"{"kind":"opened","error":"settings-unavailable"}"#.utf8))
+                    }
+                    continue
                 }
-                if message.kind == "snapshot" || message.kind == "ack" || message.kind == "open" || message.kind == "closed" {
+                if message.kind == "snapshot" || message.kind == "ack" || message.kind == "closed" {
                     _ = try? await post(message)
                 }
-                if message.kind == "open" { write(Data(#"{"kind":"opened"}"#.utf8)) }
             }
         } catch { await close() }
     }

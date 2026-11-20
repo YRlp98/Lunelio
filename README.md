@@ -9,13 +9,13 @@ See what’s playing and control Spotify from your Mac’s desktop or Notificati
 
 Lunelio is free and open source, with all features included. It’s designed to be lightweight and efficient. You don’t need Spotify Premium or an API key to use it, though Spotify’s own playback rules still apply.
 
-[![Release 1.0.1](https://img.shields.io/badge/release-v1.0.1-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1)
+[![Release 1.1.0](https://img.shields.io/badge/release-v1.1.0-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v1.1.0)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1DB954?style=flat-square)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/YRlp98/Lunelio?style=flat-square&logo=github&label=stars)](https://github.com/YRlp98/Lunelio/stargazers)
 [![Release downloads](https://img.shields.io/github/downloads/YRlp98/Lunelio/total?style=flat-square&color=1DB954&label=release%20downloads "Downloads of all release files, including checksums")](https://github.com/YRlp98/Lunelio/releases)
 [![macOS 14+](https://img.shields.io/badge/macOS-14%2B-555555?style=flat-square&logo=apple)](#current-support)
 
-[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/download/v1.0.1/Lunelio-1.0.1.dmg)
+[![Download for Mac](https://img.shields.io/badge/download-for%20Mac-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/download/v1.1.0/Lunelio-1.1.0.dmg)
 
 ![Lunelio cover with dark macOS widgets playing Breathing Stone by Tenno](Docs/Images/lunelio-cover.webp)
 
@@ -26,7 +26,7 @@ Lunelio is free and open source, with all features included. It’s designed to 
 
 Support for other browsers and operating systems is planned.
 
-Current release: [1.0.1](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1), with a DNS rebinding protection fix. [Changelog](CHANGELOG.md#101--2026-10-29) · [All releases](https://github.com/YRlp98/Lunelio/releases).
+Current release: [1.1.0](https://github.com/YRlp98/Lunelio/releases/tag/v1.1.0), with update checks and a fix for connection recovery at startup. [Changelog](CHANGELOG.md#110--2026-11-20) · [All releases](https://github.com/YRlp98/Lunelio/releases).
 
 ## Features
 
@@ -36,6 +36,7 @@ Current release: [1.0.1](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1),
 - Click the progress bar to seek in 10% steps, from 0% to 100%.
 - Automatic switching between Spotify Desktop and Chrome based on what’s playing.
 - Start at login and hide the menu-bar icon from Settings.
+- Check for new releases from Settings, or look for the update tag in the Chrome connector.
 
 I’m working on improvements and new features.
 
@@ -51,7 +52,7 @@ I’m working on improvements and new features.
   </p>
 
   <p align="center">
-    <img src="Docs/Images/settings.webp" alt="Lunelio 1.0.0 Settings with Spotify Desktop and Chrome connection options" width="490">
+    <img src="Docs/Images/settings.webp" alt="Lunelio Settings with Spotify Desktop and Chrome connection options" width="490">
   </p>
 </details>
 
@@ -59,7 +60,7 @@ I’m working on improvements and new features.
 
 ## How to use
 
-Download [Lunelio-1.0.1.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.0.1/Lunelio-1.0.1.dmg), open it, and drag **Lunelio** to **Applications**. You don’t need Xcode to use the app.
+Download [Lunelio-1.1.0.dmg](https://github.com/YRlp98/Lunelio/releases/download/v1.1.0/Lunelio-1.1.0.dmg), open it, and drag **Lunelio** to **Applications**. You don’t need Xcode to use the app.
 
 The app is not notarized yet. See the [installation guide](Docs/Installing%20Lunelio.md) if macOS blocks it.
 
@@ -88,6 +89,14 @@ Click the cover to open Spotify, or use **•••** for Settings. macOS may de
 
 Lunelio follows your Mac’s light or dark appearance automatically, so there’s no theme setting to change in the app.
 
+### Updating Lunelio
+
+Open **••• → Settings… → Check for Updates**. The Chrome connector also checks when you open its popup and shows an **Update available** tag beside its version if a newer stable release is available.
+
+Follow the link to GitHub, download the new DMG, quit Lunelio, and replace the app in **Applications**. Open it again. Updates are installed manually.
+
+If you use the Chrome connector, reload **Lunelio Connector** in `chrome://extensions` after replacing the app, then reload your Spotify tabs.
+
 ## Development
 
 Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** to run or **⌘U** to test. From the project folder:
@@ -98,7 +107,7 @@ Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** t
 ./package.command # Create the installer in build/Downloads/
 ```
 
-The app, widget, and connector currently share version **1.0.1**, set in **Config/Version.xcconfig**.
+The app, widget, and connector currently share version **1.1.0**, set in **Config/Version.xcconfig**.
 
 See [Editing in Xcode](Docs/Editing%20in%20Xcode.md) for the code map and [Release Guide](Docs/Release%20Guide.md) for distribution details.
 
