@@ -7,7 +7,7 @@ A handy macOS widget for [Spotify Desktop](https://www.spotify.com/download/mac/
 
 See what’s playing and control Spotify from your Mac’s desktop or Notification Center. Play, pause, skip, and seek without switching apps.
 
-Lunelio is free and open source, with all features included. It’s built to be lightweight and efficient, and you don’t need Spotify Premium or an API key to use it. Spotify’s own playback rules still apply.
+Lunelio is free and open source, with all features included. It’s designed to be lightweight and efficient. You don’t need Spotify Premium or an API key to use it, though Spotify’s own playback rules still apply.
 
 [![Release 1.0.1](https://img.shields.io/badge/release-v1.0.1-1DB954?style=flat-square)](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1DB954?style=flat-square)](LICENSE)
@@ -21,8 +21,10 @@ Lunelio is free and open source, with all features included. It’s built to be 
 
 ## Current support
 
-- Requires macOS 14 or later. Support for other operating systems is planned.
-- Works with Spotify Desktop and the Spotify web player in Google Chrome. More browsers are planned.
+- Requires macOS 14 or later.
+- Works with Spotify Desktop and the Spotify web player in Google Chrome.
+
+Support for other browsers and operating systems is planned.
 
 Current release: [1.0.1](https://github.com/YRlp98/Lunelio/releases/tag/v1.0.1), with a DNS rebinding protection fix. [Changelog](CHANGELOG.md#101--2026-10-29) · [All releases](https://github.com/YRlp98/Lunelio/releases).
 
@@ -63,7 +65,7 @@ The app is not notarized yet. See the [installation guide](Docs/Installing%20Lun
 
 1. Open **Lunelio**.
 2. Right-click your desktop → **Edit Widgets → Lunelio** and add a small, medium, or large widget. You can also add it in Notification Center.
-3. Open **••• → Settings…** on the widget and connect Spotify using either option below.
+3. Open **••• → Settings…** on the widget, then connect Spotify Desktop or the web player in Chrome.
 
 ### Spotify Desktop
 
@@ -78,7 +80,7 @@ You don’t need a browser extension for Spotify Desktop.
 2. Open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select that folder.
 3. Open [Spotify’s web player](https://open.spotify.com) and reload the tab once. Start a song in Spotify, then use the widget to control playback.
 
-Reload your Spotify tabs after each connector update. If the widget can’t start playback in a newly reopened tab, click Play in Spotify once.
+Reload your Spotify tabs after updating the connector. If playback won’t start from the widget after you reopen a Spotify tab, click Play in Spotify once.
 
 Spotify installed as a Chrome web app works too. Choose **Automatic** in Settings to follow whichever source is playing. If both are playing, Spotify Desktop takes priority.
 
@@ -96,7 +98,7 @@ Open **Lunelio.xcodeproj**, select **Lunelio → My Mac**, then press **⌘R** t
 ./package.command # Create the installer in build/Downloads/
 ```
 
-The current development version is **1.0.1**. The app, widget, and connector share their version in **Config/Version.xcconfig**.
+The app, widget, and connector currently share version **1.0.1**, set in **Config/Version.xcconfig**.
 
 See [Editing in Xcode](Docs/Editing%20in%20Xcode.md) for the code map and [Release Guide](Docs/Release%20Guide.md) for distribution details.
 
